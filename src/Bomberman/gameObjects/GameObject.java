@@ -46,6 +46,10 @@ public abstract class GameObject {
         return resetY;
     }
 
+    public Rectangle getHitBox() {
+        return hitBox;
+    }
+
     public abstract void update();
 
     public abstract void render(Graphics g);
