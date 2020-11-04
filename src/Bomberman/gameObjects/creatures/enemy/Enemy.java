@@ -16,14 +16,14 @@ public abstract class Enemy extends Creature {
         hitBox.y = 18;
         hitBox.width = 30;
         hitBox.height = 32;
-        speed = 3.0f;
+        speed = 2.5f;
     }
 
-    protected abstract void makeChoice();
+    public abstract void makeChoice();
 
     @Override
     public void update() {
-        if (Alive) {
+        if (alive) {
             xMove = 0;
             yMove = 0;
             checkAlive();
@@ -48,9 +48,13 @@ public abstract class Enemy extends Creature {
 
     @Override
     public void render(Graphics g) {
-        if (Alive) {
+        if (alive) {
             g.drawImage(getFrame(), x, y, Resources.pWidth, Resources.pHeight, null);
+            //g.setColor(Color.blue); // debugging purpose
+            //g.fillRect(x + hitBox.x, y + hitBox.y, hitBox.width, hitBox.height); // debugging purpose
         } else {
+            xMove = 0;
+            yMove = 0;
             g.drawImage(Resources.dead, x, y, null);
         }
     }

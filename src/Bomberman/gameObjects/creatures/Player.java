@@ -14,7 +14,7 @@ public class Player extends Creature {
     private int bagCapacity;
     private int cntBomb;
     private int bombLength;
-    private String name;
+    private final String name;
 
     private static int cnt = 0;
     private final int stable;
@@ -40,7 +40,7 @@ public class Player extends Creature {
 
     @Override
     public void update() {
-        if (Alive) {
+        if (alive) {
             yMove = 0;
             xMove = 0;
             checkAlive();
@@ -153,7 +153,7 @@ public class Player extends Creature {
             bombLength++;
             tmp[(y + Resources.tWidth / 2) / 64][(x + Resources.pHeight / 2) / 64] = '0';
         } else if (tmp[(y + Resources.tWidth / 2) / 64][(x + Resources.pHeight / 2) / 64] == '2') {
-            speed += 0.5f;
+            speed += 0.25f;
             tmp[(y + Resources.tWidth / 2) / 64][(x + Resources.pHeight / 2) / 64] = '0';
         } else if (tmp[(y + Resources.tWidth / 2) / 64][(x + Resources.pHeight / 2) / 64] == '3') {
             bagCapacity++;
@@ -191,7 +191,7 @@ public class Player extends Creature {
 
     @Override
     public void render(Graphics g) {
-        if (Alive) {
+        if (alive) {
             g.drawImage(getFrame(), x, y, Resources.pWidth, Resources.pHeight, null);
             //g.setColor(Color.blue); // debugging purpose
             //g.fillRect(x + hitBox.x, y + hitBox.y, hitBox.width, hitBox.height); // debugging purpose
@@ -199,6 +199,8 @@ public class Player extends Creature {
                 bomb.render(g);
             }
         } else {
+            xMove = 0;
+            yMove = 0;
             g.drawImage(Resources.dead, x, y, null);
         }
     }
