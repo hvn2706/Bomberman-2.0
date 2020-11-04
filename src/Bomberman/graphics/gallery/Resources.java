@@ -13,16 +13,14 @@ public class Resources {
     public static BufferedImage twoPlayer2;
     public static BufferedImage back1;
     public static BufferedImage back2;
-    public static BufferedImage background1;
     public static BufferedImage background2;
     public static BufferedImage chest;
-    public static BufferedImage box;
     public static BufferedImage greyBrick;
-    public static BufferedImage whiteBrick;
     public static BufferedImage luigi;
     public static BufferedImage werewolf;
     public static BufferedImage minotaur;
     public static BufferedImage redGhost;
+    public static BufferedImage blueGhost;
     public static BufferedImage bombs;
     public static BufferedImage explosions;
     public static BufferedImage electric;
@@ -59,13 +57,13 @@ public class Resources {
         BufferedImage tiles = loadImage("resources/tiles.png");
         BufferedImage buttons = loadImage("resources/buttons.png");
         menuBG = loadImage("resources/smolljungle.png");
-        background1 = loadImage("resources/grass_ground.png");
         background2 = loadImage("resources/floor.png");
         bombs = loadImage("resources/bomb.png");
         luigi = loadImage("resources/luigi.png");
         werewolf = loadImage("resources/wolf.png");
         minotaur = loadImage("resources/minotaur.png");
         redGhost = loadImage("resources/ghost1.png");
+        blueGhost = loadImage("resources/ghost2.png");
         explosions = loadImage("resources/explosion.png");
         electric = loadImage("resources/power1.png");
         sonic = loadImage("resources/power2.png");
@@ -80,8 +78,6 @@ public class Resources {
         back2 = buttons.getSubimage(0, 576, 196, 64);
 
         chest = tiles.getSubimage(tWidth * 6, 0, tWidth, tHeight);
-        box = tiles.getSubimage(tWidth * 2, 0, tWidth, tHeight);
-        whiteBrick = tiles.getSubimage(tWidth * 3, 0, tWidth, tHeight);
         greyBrick = tiles.getSubimage(tWidth * 4, 0, tWidth, tHeight);
 
         for (int i = 0; i < 5; ++i) {
