@@ -16,6 +16,7 @@ public class GameScene2 extends MyScene { // 2 player
     private final MyButton back;
     private final Status strLuigi;
     private final Status strMinotaur;
+    private long timer = 0;
 
     public GameScene2(Game game) {
         super(game);
@@ -34,11 +35,31 @@ public class GameScene2 extends MyScene { // 2 player
         return minotaur;
     }
 
+    public void setTimer(long timer) {
+        this.timer = timer;
+    }
+
     @Override
     public void update() {
         luigi.update();
         minotaur.update();
         back.update(game.getMenuScene());
+
+        if (!luigi.alive || !minotaur.alive) {
+            long lastTime = System.nanoTime();
+            timer += System.nanoTime() - lastTime;
+            if (luigi.alive) {
+                game.getResultScene().setResult(Resources.player1win);
+            } else if (minotaur.alive) {
+                game.getResultScene().setResult(Resources.player2win);
+            } else {
+                game.getResultScene().setResult(Resources.menuBG);
+            }
+
+            if (timer >= 10000) {
+                MyScene.setCurrentScene(game.getResultScene());
+            }
+        }
     }
 
     @Override

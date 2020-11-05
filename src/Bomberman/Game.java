@@ -5,10 +5,7 @@ import Bomberman.graphics.Display;
 import Bomberman.input.KeyManager;
 import Bomberman.input.MouseManager;
 import Bomberman.map.Map;
-import Bomberman.scenes.GameScene1;
-import Bomberman.scenes.GameScene2;
-import Bomberman.scenes.MenuScene;
-import Bomberman.scenes.MyScene;
+import Bomberman.scenes.*;
 
 import java.awt.*;
 import java.awt.image.BufferStrategy;
@@ -27,6 +24,7 @@ public class Game implements Runnable {
     private final GameScene1 gameScene1;
     private final GameScene2 gameScene2;
     private final MenuScene menuScene;
+    private final ResultScene resultScene;
     private final Map gameMap;
 
     private final KeyManager keyMN = new KeyManager();
@@ -46,6 +44,7 @@ public class Game implements Runnable {
         gameScene1 = new GameScene1(this);
         gameScene2 = new GameScene2(this);
         menuScene = new MenuScene(this);
+        resultScene = new ResultScene(this);
         MyScene.setCurrentScene(menuScene);
     }
 
@@ -98,6 +97,10 @@ public class Game implements Runnable {
 
     public MenuScene getMenuScene() {
         return menuScene;
+    }
+
+    public ResultScene getResultScene() {
+        return resultScene;
     }
 
     public Map getGameMap() {

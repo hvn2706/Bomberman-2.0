@@ -1,6 +1,8 @@
 package Bomberman.scenes;
 
 import Bomberman.Game;
+import Bomberman.gameObjects.Portal;
+import Bomberman.gameObjects.creatures.Creature;
 import Bomberman.gameObjects.creatures.Player;
 import Bomberman.gameObjects.creatures.enemy.ABitSmarter;
 import Bomberman.gameObjects.creatures.enemy.Dummy;
@@ -23,6 +25,9 @@ public class GameScene1 extends MyScene { // 1 player
     private final MyButton back;
     private final Status strLuigi;
     private final ArrayList<Enemy> enemies;
+    private final Portal portal;
+    private int death;
+    private long timer = 0;
 
     public GameScene1(Game game) {
         super(game);
@@ -31,6 +36,8 @@ public class GameScene1 extends MyScene { // 1 player
         redGhost2 = new Dummy(game, 1226, 74, new RedGhost());
         blueGhost1 = new ABitSmarter(game, 778, 266, new BlueGhost());
         back = new MyButton(game, Resources.back1, Resources.back2, 1374, 10);
+        portal = new Portal(game, -1, -1);
+        portal.init();
         strLuigi = new Status(luigi, 1370, 150);
         enemies = new ArrayList<>();
         enemies.add(redGhost1);
@@ -50,22 +57,58 @@ public class GameScene1 extends MyScene { // 1 player
         return redGhost2;
     }
 
+    public Portal getPortal() {
+        return portal;
+    }
+
     public Enemy getBlueGhost1() {
         return blueGhost1;
+    }
+
+    public void setTimer(long timer) {
+        this.timer = timer;
+    }
+
+    public boolean open() {
+        return death == enemies.size();
     }
 
     @Override
     public void update() {
         luigi.hitMeBabe(enemies);
+        death = 0;
+        for (Creature en : enemies) {
+            if (!en.alive) {
+                death++;
+            }
+        }
+        portal.update();
         luigi.update();
         blueGhost1.update();
         redGhost1.update();
         redGhost2.update();
         back.update(game.getMenuScene());
+
+        if (luigi.alive && open()) {
+            game.getResultScene().setResult(Resources.player1win);
+        } else {
+            game.getResultScene().setResult(Resources.menuBG);
+            if (!luigi.alive) {
+                long lastTime = System.nanoTime();
+                timer += System.nanoTime() - lastTime;
+                if (timer >= 10000) {
+                    MyScene.setCurrentScene(game.getResultScene());
+                }
+            }
+        }
     }
 
     @Override
     public void render(Graphics g) {
+        if (game.getGameMap().getGameCoor
+                (portal.getY() / Resources.tHeight, portal.getX() / Resources.tWidth) == '0') {
+            portal.render(g);
+        }
         strLuigi.render(g);
         luigi.render(g);
         blueGhost1.render(g);

@@ -14,6 +14,8 @@ public class Resources {
     public static BufferedImage back1;
     public static BufferedImage back2;
     public static BufferedImage background2;
+    public static BufferedImage player1win;
+    public static BufferedImage player2win;
     public static BufferedImage chest;
     public static BufferedImage greyBrick;
     public static BufferedImage luigi;
@@ -38,6 +40,7 @@ public class Resources {
     public static BufferedImage[] power1 = new BufferedImage[5];
     public static BufferedImage[] power2 = new BufferedImage[5];
     public static BufferedImage[] power3 = new BufferedImage[5];
+    public static BufferedImage[] portal = new BufferedImage[4];
     public BufferedImage[] Down = new BufferedImage[3];
     public BufferedImage[] Up = new BufferedImage[3];
     public BufferedImage[] Left = new BufferedImage[3];
@@ -56,6 +59,9 @@ public class Resources {
     public static void init() {
         BufferedImage tiles = loadImage("resources/tiles.png");
         BufferedImage buttons = loadImage("resources/buttons.png");
+        BufferedImage portals = loadImage("resources/doors.png");
+        player1win = loadImage("resources/player1win.png");
+        player2win = loadImage("resources/player2win.png");
         menuBG = loadImage("resources/smolljungle.png");
         background2 = loadImage("resources/floor.png");
         bombs = loadImage("resources/bomb.png");
@@ -86,6 +92,9 @@ public class Resources {
             power1[i] = electric.getSubimage(tWidth * i, 0, tWidth, tHeight);
             power2[i] = sonic.getSubimage(tWidth * i, 0, tWidth, tHeight);
             power3[i] = sparkleOrb.getSubimage(tWidth * i, 0, tWidth, tHeight);
+            if (i < 4) {
+                portal[i] = portals.getSubimage(0, tHeight * i, tWidth, tHeight);
+            }
         }
     }
 }
