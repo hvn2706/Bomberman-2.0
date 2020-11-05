@@ -41,6 +41,7 @@ public class MyButton {
                     game.getGameScene1().getBlueGhost1().reset();
                     game.getGameScene1().getRedGhost1().reset();
                     game.getGameScene1().getRedGhost2().reset();
+                    game.getGameScene1().getPortal().init();
                 } else if (scene == game.getGameScene2()) {
                     game.getGameScene2().getLuigi().reset();
                     game.getGameScene2().getMinotaur().reset();

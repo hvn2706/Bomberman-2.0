@@ -1,12 +1,14 @@
 package Bomberman.gameObjects;
 
 import Bomberman.Game;
+import Bomberman.gameObjects.creatures.Player;
 import Bomberman.graphics.Animation;
 import Bomberman.graphics.gallery.Resources;
 import Bomberman.map.Map;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Random;
 
 public class Portal extends GameObject {
@@ -37,8 +39,17 @@ public class Portal extends GameObject {
 
     @Override
     public void update() {
+        if (game.getGameMap().getGameCoor(y / Resources.tHeight, x / Resources.tWidth) == '0') {
+            game.getGameMap().setBombCoor(y / Resources.tHeight, x / Resources.tWidth, '0');
+        }
+
         if (game.getGameScene1().open() && door.getCurrentFrame() != Resources.portal[3]) {
             door.update();
+        }
+
+        if (game.getGameScene1().open()) {
+            Player tmp = game.getGameScene1().getLuigi();
+
         }
     }
 
