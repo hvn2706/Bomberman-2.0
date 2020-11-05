@@ -176,11 +176,6 @@ public class Player extends Creature {
         return name;
     }
 
-    // debugging purpose
-    public int getCntBomb() {
-        return cntBomb;
-    }
-
     public int getBagCapacity() {
         return bagCapacity;
     }
