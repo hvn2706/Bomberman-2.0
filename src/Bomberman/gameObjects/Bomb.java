@@ -10,7 +10,7 @@ import java.awt.*;
 
 public class Bomb extends GameObject {
     private final Animation wiggle = new Animation(Resources.bomb, 90000000);
-    private long lastTime, timer;
+    private final long lastTime;
     private boolean isBombed;
     private final Player owner;
     private final int bombLength;
@@ -103,8 +103,8 @@ public class Bomb extends GameObject {
         char[][] tmp__ = game.getGameMap().getPowerMap();
         game.getGameMap().setBombCoor(coorX, coorY, '0');
         game.getGameMap().setGameCoor(coorX, coorY, '0');
-        for (int i = 0; i < game.getGameMap().getMAP_HEIGHT(); ++i) {
-            for (int j = 0; j < game.getGameMap().getMAP_WIDTH(); ++j) {
+        for (int i = 0; i < Map.MAP_HEIGHT; ++i) {
+            for (int j = 0; j < Map.MAP_WIDTH; ++j) {
                 if (tmp_[i][j] == fire) {
                     if (tmp[i][j] == '0') {
                         tmp__[i][j] = '0';
@@ -119,7 +119,7 @@ public class Bomb extends GameObject {
 
     @Override
     public void update() {
-        timer = System.nanoTime() - lastTime;
+        long timer = System.nanoTime() - lastTime;
         wiggle.update();
 
         if (timer > 2000000000.0 && timer < 2500000000.0) {

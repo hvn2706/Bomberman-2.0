@@ -22,18 +22,21 @@ public abstract class Creature extends GameObject {
     protected final Animation aRight;
     protected BufferedImage current;
 
-    protected boolean alive;
-    protected final float DEFAULT_SPEED = 5.0f;
+    public boolean alive;
+    protected final float DEFAULT_SPEED = 4.0f;
     protected float speed = DEFAULT_SPEED;
+    protected final long frameSpeed = 60000000;
+    protected long deadTimer;
+    protected long deadNow = 0;
 
     public Creature(Game game, int x, int y, Resources asset) {
         super(game, x, y);
         alive = true;
         this.asset = asset;
-        aDown  = new Animation(asset.Down, 60000000);
-        aUp    = new Animation(asset.Up, 60000000);
-        aLeft  = new Animation(asset.Left, 60000000);
-        aRight = new Animation(asset.Right, 60000000);
+        aDown  = new Animation(asset.Down, frameSpeed);
+        aUp    = new Animation(asset.Up, frameSpeed);
+        aLeft  = new Animation(asset.Left, frameSpeed);
+        aRight = new Animation(asset.Right, frameSpeed);
     }
 
     private boolean intersect(Rectangle r1, Rectangle r2) {
@@ -179,5 +182,7 @@ public abstract class Creature extends GameObject {
         x = resetX;
         y = resetY;
         alive = true;
+        deadTimer = 0;
+        deadNow = 0;
     }
 }

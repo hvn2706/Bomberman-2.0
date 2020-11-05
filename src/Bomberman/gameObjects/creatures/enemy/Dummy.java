@@ -6,10 +6,11 @@ import Bomberman.graphics.gallery.Resources;
 import java.util.Random;
 
 public class Dummy extends Enemy {
-    private Random rand = new Random();
+    private final Random rand = new Random();
 
     public Dummy(Game game, int x, int y, Resources asset) {
         super(game, x, y, asset);
+        speed = 2.5f;
     }
 
     @Override

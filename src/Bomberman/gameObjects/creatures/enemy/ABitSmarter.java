@@ -125,7 +125,7 @@ public class ABitSmarter extends Enemy {
         if (timer > 1500000000) {
             timer = 0;
             if (speed == 2.5f) {
-                speed = 5.5f;
+                speed = 4.5f;
             } else {
                 speed = 2.5f;
             }
@@ -184,7 +184,6 @@ class MyPair {
 }
 
 class Cmp implements Comparator<MyPair> {
-
     @Override
     public int compare(MyPair o1, MyPair o2) {
         return Integer.compare(o1.w, o2.w);

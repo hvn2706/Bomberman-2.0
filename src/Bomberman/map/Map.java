@@ -10,9 +10,9 @@ import java.util.Scanner;
 
 public class Map {
     private final String path;
-    private char[][] gameMap;
-    private char[][] bombMap;
-    private char[][] powerMap;
+    private final char[][] gameMap;
+    private final char[][] bombMap;
+    private final char[][] powerMap;
     public static final int MAP_WIDTH = 21;
     public static final int MAP_HEIGHT = 14;
 
@@ -26,6 +26,7 @@ public class Map {
         gameMap = new char[100][100];
         bombMap = new char[100][100];
         powerMap = new char[100][100];
+        loadMap(path);
     }
 
     public char[][] getPowerMap() {
@@ -36,12 +37,12 @@ public class Map {
         return bombMap;
     }
 
-    public char getBombCoor(int x, int y) {
-        return bombMap[x][y];
-    }
-
     public void setBombCoor(int x, int y, char c) {
         bombMap[x][y] = c;
+    }
+
+    public void setPowerCoor(int x, int y, char c) {
+        powerMap[x][y] = c;
     }
 
     public char[][] getGameMap() {
@@ -54,14 +55,6 @@ public class Map {
 
     public void setGameCoor(int x, int y, char c) {
         gameMap[x][y] = c;
-    }
-
-    public int getMAP_WIDTH() {
-        return MAP_WIDTH;
-    }
-
-    public int getMAP_HEIGHT() {
-        return MAP_HEIGHT;
     }
 
     public void update() {

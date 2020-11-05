@@ -5,10 +5,10 @@ import Bomberman.gameObjects.creatures.Player;
 import Bomberman.graphics.Animation;
 import Bomberman.graphics.gallery.Resources;
 import Bomberman.map.Map;
+import Bomberman.scenes.MyScene;
 
 import java.awt.*;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Random;
 
 public class Portal extends GameObject {
@@ -48,8 +48,12 @@ public class Portal extends GameObject {
         }
 
         if (game.getGameScene1().open()) {
-            Player tmp = game.getGameScene1().getLuigi();
-
+            Player player = game.getGameScene1().getLuigi();
+            int playerY = (player.getX() + player.getHitBox().x + player.getHitBox().width / 2) / Resources.tWidth;
+            int playerX = (player.getY() + player.getHitBox().y + player.getHitBox().height / 2) / Resources.tWidth;
+            if (playerX == y / Resources.tHeight && playerY == x / Resources.tWidth) {
+                MyScene.setCurrentScene(game.getResultScene());
+            }
         }
     }
 

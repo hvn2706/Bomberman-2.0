@@ -16,7 +16,6 @@ public abstract class Enemy extends Creature {
         hitBox.y = 18;
         hitBox.width = 30;
         hitBox.height = 32;
-        speed = 2.5f;
     }
 
     public abstract void makeChoice();
@@ -55,7 +54,11 @@ public abstract class Enemy extends Creature {
         } else {
             xMove = 0;
             yMove = 0;
-            g.drawImage(Resources.dead, x, y, null);
+            deadTimer = System.nanoTime();
+            deadNow += System.nanoTime() - deadTimer;
+            if (deadNow < 25000) {
+                g.drawImage(Resources.dead, x, y, null);
+            }
         }
     }
 }

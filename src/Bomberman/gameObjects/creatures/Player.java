@@ -73,21 +73,24 @@ public class Player extends Creature {
                         int yBomb = 0;
 
                         if ((x + hitBox.x + hitBox.width) % Resources.tWidth > 32) {
-                            xBomb = (x + hitBox.x + hitBox.width) / Resources.tWidth;
+                            yBomb = (x + hitBox.x + hitBox.width) / Resources.tWidth;
                         } else if ((x + hitBox.x + hitBox.width) % Resources.tWidth <= 32) {
-                            xBomb = (x + hitBox.x) / Resources.tWidth;
+                            yBomb = (x + hitBox.x) / Resources.tWidth;
                         }
 
                         if ((y + hitBox.y + hitBox.height) % Resources.tHeight > 32) {
-                            yBomb = (y + hitBox.y + hitBox.height) / Resources.tHeight;
+                            xBomb = (y + hitBox.y + hitBox.height) / Resources.tHeight;
                         } else if ((y + hitBox.y + hitBox.height) % Resources.tHeight <= 32) {
-                            yBomb = (y + hitBox.y) / Resources.tHeight;
+                            xBomb = (y + hitBox.y) / Resources.tHeight;
                         }
 
-                        if (cntBomb < bagCapacity &&
-                                game.getGameMap().getGameCoor(yBomb, xBomb) == '0') {
-                            Bomb bomb = new Bomb(game, xBomb * Resources.tWidth,
-                                    yBomb * Resources.tHeight, bombLength, this);
+                        char gameCoor = game.getGameMap().getGameCoor(xBomb, yBomb);
+
+                        if (cntBomb < bagCapacity && gameCoor == '0' &&
+                           (xBomb != game.getGameScene1().getPortal().getY() / Resources.tWidth ||
+                            yBomb != game.getGameScene1().getPortal().getX() / Resources.tWidth)) {
+                            Bomb bomb = new Bomb(game, yBomb * Resources.tWidth,
+                                    xBomb * Resources.tHeight, bombLength, this);
                             bombs.add(bomb);
                             bomb.setBombed(true);
                         }
@@ -117,21 +120,21 @@ public class Player extends Creature {
                         int yBomb = 0;
 
                         if ((x + hitBox.x + hitBox.width) % Resources.tWidth > 32) {
-                            xBomb = (x + hitBox.x + hitBox.width) / Resources.tWidth;
+                            yBomb = (x + hitBox.x + hitBox.width) / Resources.tWidth;
                         } else if ((x + hitBox.x + hitBox.width) % Resources.tWidth <= 32) {
-                            xBomb = (x + hitBox.x) / Resources.tWidth;
+                            yBomb = (x + hitBox.x) / Resources.tWidth;
                         }
 
                         if ((y + hitBox.y + hitBox.height) % Resources.tHeight > 32) {
-                            yBomb = (y + hitBox.y + hitBox.height) / Resources.tHeight;
+                            xBomb = (y + hitBox.y + hitBox.height) / Resources.tHeight;
                         } else if ((y + hitBox.y + hitBox.height) % Resources.tHeight <= 32) {
-                            yBomb = (y + hitBox.y) / Resources.tHeight;
+                            xBomb = (y + hitBox.y) / Resources.tHeight;
                         }
 
-                        if (cntBomb < bagCapacity &&
-                                game.getGameMap().getGameCoor(yBomb, xBomb) == '0') {
-                            Bomb bomb = new Bomb(game, xBomb * Resources.tWidth,
-                                    yBomb * Resources.tHeight, bombLength, this);
+                        char gameCoor = game.getGameMap().getGameCoor(xBomb, yBomb);
+                        if (cntBomb < bagCapacity && gameCoor == '0') {
+                            Bomb bomb = new Bomb(game, yBomb * Resources.tWidth,
+                                    xBomb * Resources.tHeight, bombLength, this);
                             bombs.add(bomb);
                             bomb.setBombed(true);
                         }
@@ -173,7 +176,8 @@ public class Player extends Creature {
         return name;
     }
 
-    public int getCntBomb() { // debugging purpose
+    // debugging purpose
+    public int getCntBomb() {
         return cntBomb;
     }
 
@@ -201,13 +205,20 @@ public class Player extends Creature {
         } else {
             xMove = 0;
             yMove = 0;
-            g.drawImage(Resources.dead, x, y, null);
+            deadTimer = System.nanoTime();
+            deadNow += System.nanoTime() - deadTimer;
+            System.out.println(deadNow);
+            if (deadNow < 20000) {
+                g.drawImage(Resources.dead, x, y, null);
+            }
         }
     }
 
     @Override
     public void reset() {
         super.reset();
+        bombs.clear();
+        cntBomb = 0;
         bombLength = 1;
         bagCapacity = 1;
         speed = DEFAULT_SPEED;

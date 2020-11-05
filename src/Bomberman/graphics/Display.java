@@ -11,7 +11,7 @@ public class Display {
     private final int width;
     private final int height;
 
-    public Display(String title, int width, int height){
+    public Display(String title, int width, int height) {
         this.title = title;
         this.width = width;
         this.height = height;
@@ -19,7 +19,7 @@ public class Display {
         createDisplay();
     }
 
-    private void createDisplay(){
+    private void createDisplay() {
         window = new JFrame(title);
         window.setSize(width, height);
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

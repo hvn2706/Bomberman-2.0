@@ -34,6 +34,8 @@ public class MyButton {
             if (game.getMouseMN().isLeft()) {
                 if (scene != game.getMenuScene()) {
                     game.getGameMap().resetMap();
+                    game.getGameScene1().getPortal().setX(-1);
+                    game.getGameScene1().getPortal().setY(-1);
                 }
 
                 if (scene == game.getGameScene1()) {
@@ -42,9 +44,11 @@ public class MyButton {
                     game.getGameScene1().getRedGhost1().reset();
                     game.getGameScene1().getRedGhost2().reset();
                     game.getGameScene1().getPortal().init();
+                    game.getGameScene1().setTimer(0);
                 } else if (scene == game.getGameScene2()) {
                     game.getGameScene2().getLuigi().reset();
                     game.getGameScene2().getMinotaur().reset();
+                    game.getGameScene2().setTimer(0);
                 }
                 MyScene.setCurrentScene(scene);
             }
