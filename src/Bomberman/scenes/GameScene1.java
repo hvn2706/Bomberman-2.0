@@ -92,7 +92,7 @@ public class GameScene1 extends MyScene { // 1 player
         if (luigi.alive && open()) {
             game.getResultScene().setResult(Resources.player1win);
         } else {
-            game.getResultScene().setResult(Resources.menuBG);
+            game.getResultScene().setResult(Resources.youLose);
             if (!luigi.alive) {
                 long lastTime = System.nanoTime();
                 timer += System.nanoTime() - lastTime;

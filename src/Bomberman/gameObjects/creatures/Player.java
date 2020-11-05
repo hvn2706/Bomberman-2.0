@@ -207,7 +207,6 @@ public class Player extends Creature {
             yMove = 0;
             deadTimer = System.nanoTime();
             deadNow += System.nanoTime() - deadTimer;
-            System.out.println(deadNow);
             if (deadNow < 20000) {
                 g.drawImage(Resources.dead, x, y, null);
             }

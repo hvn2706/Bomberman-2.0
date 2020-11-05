@@ -16,6 +16,8 @@ public class Resources {
     public static BufferedImage background2;
     public static BufferedImage player1win;
     public static BufferedImage player2win;
+    public static BufferedImage draw;
+    public static BufferedImage youLose;
     public static BufferedImage chest;
     public static BufferedImage greyBrick;
     public static BufferedImage luigi;
@@ -62,6 +64,8 @@ public class Resources {
         BufferedImage portals = loadImage("resources/doors.png");
         player1win = loadImage("resources/player1win.png");
         player2win = loadImage("resources/player2win.png");
+        youLose = loadImage("resources/youlose.png");
+        draw = loadImage("resources/draw.png");
         menuBG = loadImage("resources/smolljungle.png");
         background2 = loadImage("resources/floor.png");
         bombs = loadImage("resources/bomb.png");

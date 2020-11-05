@@ -53,7 +53,7 @@ public class GameScene2 extends MyScene { // 2 player
             } else if (minotaur.alive) {
                 game.getResultScene().setResult(Resources.player2win);
             } else {
-                game.getResultScene().setResult(Resources.menuBG);
+                game.getResultScene().setResult(Resources.draw);
             }
 
             if (timer >= 10000) {
