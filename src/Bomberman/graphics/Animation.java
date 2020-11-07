@@ -29,6 +29,10 @@ public class Animation {
         }
     }
 
+    public void reset() {
+        index = 0;
+    }
+
     public BufferedImage getCurrentFrame() {
         return frames[index];
     }

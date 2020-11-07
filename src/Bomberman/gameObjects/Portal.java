@@ -19,6 +19,7 @@ public class Portal extends GameObject {
     }
 
     public void init() {
+        door.reset();
         char[][] map = game.getGameMap().getGameMap();
         ArrayList<Point> chests = new ArrayList<>();
         for (int i = 0; i < Map.MAP_HEIGHT; ++i) {
