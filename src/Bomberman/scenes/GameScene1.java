@@ -22,6 +22,7 @@ public class GameScene1 extends MyScene { // 1 player
     private final Enemy redGhost1;
     private final Enemy redGhost2;
     private final Enemy blueGhost1;
+    private final Enemy blueGhost2;
     private final MyButton back;
     private final Status strLuigi;
     private final ArrayList<Enemy> enemies;
@@ -35,6 +36,7 @@ public class GameScene1 extends MyScene { // 1 player
         redGhost1 = new Dummy(game, 522, 266, new RedGhost());
         redGhost2 = new Dummy(game, 1226, 74, new RedGhost());
         blueGhost1 = new ABitSmarter(game, 778, 266, new BlueGhost());
+        blueGhost2 = new ABitSmarter(game, 74, 778, new BlueGhost());
         back = new MyButton(game, Resources.back1, Resources.back2, 1374, 10);
         portal = new Portal(game, -1, -1);
         portal.init();
@@ -43,6 +45,7 @@ public class GameScene1 extends MyScene { // 1 player
         enemies.add(redGhost1);
         enemies.add(redGhost2);
         enemies.add(blueGhost1);
+        enemies.add(blueGhost2);
     }
 
     public Player getLuigi() {
@@ -57,12 +60,16 @@ public class GameScene1 extends MyScene { // 1 player
         return redGhost2;
     }
 
-    public Portal getPortal() {
-        return portal;
-    }
-
     public Enemy getBlueGhost1() {
         return blueGhost1;
+    }
+
+    public Enemy getBlueGhost2() {
+        return blueGhost2;
+    }
+
+    public Portal getPortal() {
+        return portal;
     }
 
     public void setTimer(long timer) {
@@ -85,6 +92,7 @@ public class GameScene1 extends MyScene { // 1 player
         portal.update();
         luigi.update();
         blueGhost1.update();
+        blueGhost2.update();
         redGhost1.update();
         redGhost2.update();
         back.update(game.getMenuScene());
@@ -112,6 +120,7 @@ public class GameScene1 extends MyScene { // 1 player
         strLuigi.render(g);
         luigi.render(g);
         blueGhost1.render(g);
+        blueGhost2.render(g);
         redGhost1.render(g);
         redGhost2.render(g);
         back.render(g);
