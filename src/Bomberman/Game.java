@@ -6,6 +6,7 @@ import Bomberman.input.KeyManager;
 import Bomberman.input.MouseManager;
 import Bomberman.map.Map;
 import Bomberman.scenes.*;
+import Bomberman.sounds.Playlist;
 
 import java.awt.*;
 import java.awt.image.BufferStrategy;
@@ -32,6 +33,8 @@ public class Game implements Runnable {
 
     public Game(String title, int width, int height) {
         Resources.init();
+        Playlist.init();
+        Playlist.backgroundMusic.playBackground();
         gameMap = new Map("resources/map1.txt");
         this.width = width;
         this.height = height;

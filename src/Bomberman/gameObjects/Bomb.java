@@ -1,6 +1,7 @@
 package Bomberman.gameObjects;
 
 import Bomberman.Game;
+import Bomberman.sounds.Playlist;
 import Bomberman.gameObjects.creatures.Player;
 import Bomberman.graphics.Animation;
 import Bomberman.graphics.gallery.Resources;
@@ -17,7 +18,7 @@ public class Bomb extends GameObject {
     private final int coorX;
     private final int coorY;
     private final char fire = 'f';
-    private int check = 1;
+    private int check = 0;
 
     public Bomb(Game game, int x, int y, int bombLength, Player owner) {
         super(game, x, y);
@@ -123,6 +124,10 @@ public class Bomb extends GameObject {
         wiggle.update();
 
         if (timer > 2000000000.0 && timer < 2500000000.0) {
+            if (check == 0) {
+                Playlist.explosion.play();
+                check = 1;
+            }
             explode();
         }
 

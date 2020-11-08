@@ -1,6 +1,7 @@
 package Bomberman.gameObjects.creatures;
 
 import Bomberman.Game;
+import Bomberman.sounds.Playlist;
 import Bomberman.gameObjects.Bomb;
 import Bomberman.graphics.gallery.Luigi;
 import Bomberman.graphics.gallery.Resources;
@@ -89,6 +90,7 @@ public class Player extends Creature {
                         if (cntBomb < bagCapacity && gameCoor == '0' &&
                            (xBomb != game.getGameScene1().getPortal().getY() / Resources.tWidth ||
                             yBomb != game.getGameScene1().getPortal().getX() / Resources.tWidth)) {
+                            Playlist.setBomb.play();
                             Bomb bomb = new Bomb(game, yBomb * Resources.tWidth,
                                     xBomb * Resources.tHeight, bombLength, this);
                             bombs.add(bomb);
@@ -133,6 +135,7 @@ public class Player extends Creature {
 
                         char gameCoor = game.getGameMap().getGameCoor(xBomb, yBomb);
                         if (cntBomb < bagCapacity && gameCoor == '0') {
+                            Playlist.setBomb.play();
                             Bomb bomb = new Bomb(game, yBomb * Resources.tWidth,
                                     xBomb * Resources.tHeight, bombLength, this);
                             bombs.add(bomb);
@@ -153,12 +156,15 @@ public class Player extends Creature {
         char[][] tmp = game.getGameMap().getPowerMap();
 
         if (tmp[(y + Resources.tWidth / 2) / 64][(x + Resources.pHeight / 2) / 64] == '1') {
+            Playlist.eatPower.play();
             bombLength++;
             tmp[(y + Resources.tWidth / 2) / 64][(x + Resources.pHeight / 2) / 64] = '0';
         } else if (tmp[(y + Resources.tWidth / 2) / 64][(x + Resources.pHeight / 2) / 64] == '2') {
+            Playlist.eatPower.play();
             speed += 0.25f;
             tmp[(y + Resources.tWidth / 2) / 64][(x + Resources.pHeight / 2) / 64] = '0';
         } else if (tmp[(y + Resources.tWidth / 2) / 64][(x + Resources.pHeight / 2) / 64] == '3') {
+            Playlist.eatPower.play();
             bagCapacity++;
             tmp[(y + Resources.tWidth / 2) / 64][(x + Resources.pHeight / 2) / 64] = '0';
         }

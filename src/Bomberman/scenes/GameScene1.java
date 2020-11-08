@@ -7,7 +7,8 @@ import Bomberman.gameObjects.creatures.Player;
 import Bomberman.gameObjects.creatures.enemy.ABitSmarter;
 import Bomberman.gameObjects.creatures.enemy.Dummy;
 import Bomberman.gameObjects.creatures.enemy.Enemy;
-import Bomberman.graphics.MyButton;
+import Bomberman.graphics.SceneButton;
+import Bomberman.graphics.SoundButton;
 import Bomberman.graphics.Status;
 import Bomberman.graphics.gallery.BlueGhost;
 import Bomberman.graphics.gallery.Luigi;
@@ -23,7 +24,8 @@ public class GameScene1 extends MyScene { // 1 player
     private final Enemy redGhost2;
     private final Enemy blueGhost1;
     private final Enemy blueGhost2;
-    private final MyButton back;
+    private final SceneButton back;
+    private final SoundButton soundButton;
     private final Status strLuigi;
     private final ArrayList<Enemy> enemies;
     private final Portal portal;
@@ -37,7 +39,8 @@ public class GameScene1 extends MyScene { // 1 player
         redGhost2 = new Dummy(game, 1226, 74, new RedGhost());
         blueGhost1 = new ABitSmarter(game, 778, 266, new BlueGhost());
         blueGhost2 = new ABitSmarter(game, 74, 778, new BlueGhost());
-        back = new MyButton(game, Resources.back1, Resources.back2, 1374, 10);
+        back = new SceneButton(game, Resources.back1, Resources.back2, 1374, 10);
+        soundButton = new SoundButton(game, 1374, 778);
         portal = new Portal(game, -1, -1);
         portal.init();
         strLuigi = new Status(luigi, 1370, 150);
@@ -95,6 +98,7 @@ public class GameScene1 extends MyScene { // 1 player
         blueGhost2.update();
         redGhost1.update();
         redGhost2.update();
+        soundButton.update();
         back.update(game.getMenuScene());
 
         if (luigi.alive && open()) {
@@ -124,5 +128,6 @@ public class GameScene1 extends MyScene { // 1 player
         redGhost1.render(g);
         redGhost2.render(g);
         back.render(g);
+        soundButton.render(g);
     }
 }
