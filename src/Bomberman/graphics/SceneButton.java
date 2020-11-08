@@ -6,7 +6,7 @@ import Bomberman.scenes.MyScene;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
-public class MyButton {
+public class SceneButton {
     private final int x;
     private final int y;
     private final int width;
@@ -16,7 +16,7 @@ public class MyButton {
     private boolean state;
     private final Game game;
 
-    public MyButton(Game game, BufferedImage state1, BufferedImage state2, int x, int y) {
+    public SceneButton(Game game, BufferedImage state1, BufferedImage state2, int x, int y) {
         this.state1 = state1;
         this.state2 = state2;
         this.x = x;
