@@ -13,6 +13,9 @@ public class Resources {
     public static BufferedImage twoPlayer2;
     public static BufferedImage back1;
     public static BufferedImage back2;
+    public static BufferedImage sound1;
+    public static BufferedImage sound2;
+    public static BufferedImage sound3;
     public static BufferedImage background2;
     public static BufferedImage player1win;
     public static BufferedImage player2win;
@@ -66,7 +69,7 @@ public class Resources {
         player2win = loadImage("resources/player2win.png");
         youLose = loadImage("resources/youlose.png");
         draw = loadImage("resources/draw.png");
-        menuBG = loadImage("resources/smolljungle.png");
+        menuBG = loadImage("resources/menuBackground.png");
         background2 = loadImage("resources/floor.png");
         bombs = loadImage("resources/bomb.png");
         luigi = loadImage("resources/luigi.png");
@@ -86,6 +89,9 @@ public class Resources {
         twoPlayer2 = buttons.getSubimage(0, 384, 320, 128);
         back1 = buttons.getSubimage(0, 512, 196, 64);
         back2 = buttons.getSubimage(0, 576, 196, 64);
+        sound1 = buttons.getSubimage(0, 640, 196, 64);
+        sound2 = buttons.getSubimage(0, 704, 196, 64);
+        sound3 = buttons.getSubimage(0, 768, 196, 64);
 
         chest = tiles.getSubimage(tWidth * 6, 0, tWidth, tHeight);
         greyBrick = tiles.getSubimage(tWidth * 4, 0, tWidth, tHeight);
