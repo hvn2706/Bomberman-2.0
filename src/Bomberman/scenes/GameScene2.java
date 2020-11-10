@@ -8,6 +8,7 @@ import Bomberman.graphics.Status;
 import Bomberman.graphics.gallery.Luigi;
 import Bomberman.graphics.gallery.Minotaur;
 import Bomberman.graphics.gallery.Resources;
+import Bomberman.map.Map;
 
 import java.awt.*;
 
@@ -18,32 +19,35 @@ public class GameScene2 extends MyScene { // 2 player
     private final SoundButton soundButton;
     private final Status strLuigi;
     private final Status strMinotaur;
+    private final Map gameMap;
     private long timer = 0;
 
     public GameScene2(Game game) {
         super(game);
-        minotaur = new Player(game, 1230, 778, new Minotaur());
-        luigi = new Player(game,71, 71, new Luigi());
+        gameMap = new Map("resources/map1.txt");
+        minotaur = new Player(game, gameMap, 1230, 778, new Minotaur());
+        luigi = new Player(game, gameMap, 71, 71, new Luigi());
         back = new SceneButton(game, Resources.back1, Resources.back2, 1374, 10);
         soundButton = new SoundButton(game, 1374, 778);
         strLuigi = new Status(luigi, 1370, 150);
         strMinotaur = new Status(minotaur, 1370, 300);
     }
 
-    public Player getLuigi() {
-        return luigi;
+    public Map getGameMap() {
+        return gameMap;
     }
 
-    public Player getMinotaur() {
-        return minotaur;
-    }
-
-    public void setTimer(long timer) {
-        this.timer = timer;
+    public void reset() {
+        gameMap.resetMap();
+        gameMap.setPortal(null);
+        luigi.reset();
+        minotaur.reset();
+        timer = 0;
     }
 
     @Override
     public void update() {
+        gameMap.update();
         luigi.update();
         minotaur.update();
         back.update(game.getMenuScene());
@@ -68,6 +72,7 @@ public class GameScene2 extends MyScene { // 2 player
 
     @Override
     public void render(Graphics g) {
+        gameMap.render(g);
         strLuigi.render(g);
         strMinotaur.render(g);
         luigi.render(g);

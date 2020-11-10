@@ -1,6 +1,7 @@
 package Bomberman.gameObjects.creatures;
 
 import Bomberman.Game;
+import Bomberman.map.Map;
 import Bomberman.sounds.Playlist;
 import Bomberman.gameObjects.Bomb;
 import Bomberman.graphics.gallery.Luigi;
@@ -20,8 +21,8 @@ public class Player extends Creature {
     private static int cnt = 0;
     private final int stable;
 
-    public Player(Game game, int x, int y, Resources asset) {
-        super(game, x, y, asset);
+    public Player(Game game, Map gameMap, int x, int y, Resources asset) {
+        super(game, gameMap, x, y, asset);
         current = asset.Down[0];
         cnt++;
         stable = cnt;
@@ -85,13 +86,13 @@ public class Player extends Creature {
                             xBomb = (y + hitBox.y) / Resources.tHeight;
                         }
 
-                        char gameCoor = game.getGameMap().getGameCoor(xBomb, yBomb);
+                        char gameCoor = gameMap.getGameCoor(xBomb, yBomb);
 
                         if (cntBomb < bagCapacity && gameCoor == '0' &&
                            (xBomb != game.getGameScene1().getPortal().getY() / Resources.tWidth ||
                             yBomb != game.getGameScene1().getPortal().getX() / Resources.tWidth)) {
                             Playlist.setBomb.play();
-                            Bomb bomb = new Bomb(game, yBomb * Resources.tWidth,
+                            Bomb bomb = new Bomb(game, gameMap, yBomb * Resources.tWidth,
                                     xBomb * Resources.tHeight, bombLength, this);
                             bombs.add(bomb);
                             bomb.setBombed(true);
@@ -133,10 +134,10 @@ public class Player extends Creature {
                             xBomb = (y + hitBox.y) / Resources.tHeight;
                         }
 
-                        char gameCoor = game.getGameMap().getGameCoor(xBomb, yBomb);
+                        char gameCoor = gameMap.getGameCoor(xBomb, yBomb);
                         if (cntBomb < bagCapacity && gameCoor == '0') {
                             Playlist.setBomb.play();
-                            Bomb bomb = new Bomb(game, yBomb * Resources.tWidth,
+                            Bomb bomb = new Bomb(game, gameMap, yBomb * Resources.tWidth,
                                     xBomb * Resources.tHeight, bombLength, this);
                             bombs.add(bomb);
                             bomb.setBombed(true);
@@ -153,7 +154,7 @@ public class Player extends Creature {
     }
 
     public void powerUpdate() {
-        char[][] tmp = game.getGameMap().getPowerMap();
+        char[][] tmp = gameMap.getPowerMap();
 
         if (tmp[(y + Resources.tWidth / 2) / 64][(x + Resources.pHeight / 2) / 64] == '1') {
             Playlist.eatPower.play();

@@ -2,6 +2,7 @@ package Bomberman.gameObjects;
 
 import Bomberman.Game;
 import Bomberman.graphics.gallery.Resources;
+import Bomberman.map.Map;
 
 import java.awt.*;
 
@@ -11,14 +12,16 @@ public abstract class GameObject {
     protected final int resetX;
     protected final int resetY;
     protected Game game;
+    protected Map gameMap;
     protected Rectangle hitBox;
 
-    public GameObject(Game game, int x, int y) {
+    public GameObject(Game game, Map gameMap, int x, int y) {
         this.x = x;
         this.y = y;
         resetX = x;
         resetY = y;
         this.game = game;
+        this.gameMap = gameMap;
         hitBox = new Rectangle(0, 0, Resources.tWidth, Resources.tHeight);
     }
 

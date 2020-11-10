@@ -5,6 +5,7 @@ import Bomberman.gameObjects.GameObject;
 import Bomberman.gameObjects.creatures.enemy.Enemy;
 import Bomberman.graphics.Animation;
 import Bomberman.graphics.gallery.Resources;
+import Bomberman.map.Map;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -29,8 +30,8 @@ public abstract class Creature extends GameObject {
     protected long deadTimer;
     protected long deadNow = 0;
 
-    public Creature(Game game, int x, int y, Resources asset) {
-        super(game, x, y);
+    public Creature(Game game, Map gameMap, int x, int y, Resources asset) {
+        super(game, gameMap, x, y);
         alive = true;
         this.asset = asset;
         aDown  = new Animation(asset.Down, frameSpeed);
@@ -67,7 +68,7 @@ public abstract class Creature extends GameObject {
     }
 
     public void checkAlive() {
-        char[][] tmp = game.getGameMap().getBombMap();
+        char[][] tmp = gameMap.getBombMap();
         if (tmp[(y + hitBox.y) / Resources.tHeight][(x + hitBox.x) / Resources.tWidth] == 'f' ||
             tmp[(y + hitBox.y) / Resources.tHeight][(x + hitBox.x + hitBox.width) / Resources.tWidth] == 'f' ||
             tmp[(y + hitBox.y + hitBox.height) / Resources.tHeight][(x + hitBox.x + hitBox.width) / Resources.tWidth] == 'f' ||
@@ -102,8 +103,8 @@ public abstract class Creature extends GameObject {
             if (this instanceof Enemy) {
                 xx = (x + xMove + hitBox.x + hitBox.width + 16) / Resources.tWidth;
             }
-            tmp1 = game.getGameMap().getGameCoor(yy1, xx);
-            tmp2 = game.getGameMap().getGameCoor(yy2, xx);
+            tmp1 = gameMap.getGameCoor(yy1, xx);
+            tmp2 = gameMap.getGameCoor(yy2, xx);
             if ((x + hitBox.x + hitBox.width) / Resources.tWidth == xx) {
                 x += xMove;
             } else if (tmp1 == '0' && tmp2 == '0' || tmp1 == 'f' || tmp2 == 'f') {
@@ -119,8 +120,8 @@ public abstract class Creature extends GameObject {
             if (this instanceof Enemy) {
                 xx = (x + xMove + hitBox.x - 16) / Resources.tWidth;
             }
-            tmp1 = game.getGameMap().getGameCoor(yy1, xx);
-            tmp2 = game.getGameMap().getGameCoor(yy2, xx);
+            tmp1 = gameMap.getGameCoor(yy1, xx);
+            tmp2 = gameMap.getGameCoor(yy2, xx);
             if ((x + hitBox.x)/ Resources.tWidth == xx) {
                 x += xMove;
             } else if (tmp1 == '0' && tmp2 == '0' || tmp1 == 'f' || tmp2 == 'f') {
@@ -142,8 +143,8 @@ public abstract class Creature extends GameObject {
             if (this instanceof Enemy) {
                 yy = (y + yMove + hitBox.y - 16) / Resources.tHeight;
             }
-            tmp1 = game.getGameMap().getGameCoor(yy, xx1);
-            tmp2 = game.getGameMap().getGameCoor(yy, xx2);
+            tmp1 = gameMap.getGameCoor(yy, xx1);
+            tmp2 = gameMap.getGameCoor(yy, xx2);
             if ((y + hitBox.y)/ Resources.tHeight == yy) {
                 y += yMove;
             } else if (tmp1 == '0' && tmp2 == '0' || tmp1 == 'f' || tmp2 == 'f') {
@@ -159,8 +160,8 @@ public abstract class Creature extends GameObject {
             if (this instanceof Enemy) {
                 yy = (y + yMove + hitBox.y + hitBox.height + 16) / Resources.tHeight;
             }
-            tmp1 = game.getGameMap().getGameCoor(yy, xx1);
-            tmp2 = game.getGameMap().getGameCoor(yy, xx2);
+            tmp1 = gameMap.getGameCoor(yy, xx1);
+            tmp2 = gameMap.getGameCoor(yy, xx2);
             if ((y + hitBox.y + hitBox.height)/ Resources.tHeight == yy) {
                 y += yMove;
             } else if (tmp1 == '0' && tmp2 == '0' || tmp1 == 'f' || tmp2 == 'f') {

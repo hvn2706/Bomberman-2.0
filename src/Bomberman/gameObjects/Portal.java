@@ -13,14 +13,14 @@ import java.util.Random;
 
 public class Portal extends GameObject {
     private final Animation door;
-    public Portal(Game game, int x, int y) {
-        super(game, x, y);
+    public Portal(Game game, Map gameMap, int x, int y) {
+        super(game, gameMap, x, y);
         door = new Animation(Resources.portal, 60000000);
     }
 
     public void init() {
         door.reset();
-        char[][] map = game.getGameMap().getGameMap();
+        char[][] map = gameMap.getGameMap();
         ArrayList<Point> chests = new ArrayList<>();
         for (int i = 0; i < Map.MAP_HEIGHT; ++i) {
             for (int j = 0; j < Map.MAP_WIDTH; ++j) {
@@ -35,13 +35,13 @@ public class Portal extends GameObject {
         Point tmp = chests.get(index);
         x = tmp.y * Resources.tWidth;
         y = tmp.x * Resources.tHeight;
-        game.getGameMap().setPowerCoor(tmp.x, tmp.y, '0');
+        gameMap.setPowerCoor(tmp.x, tmp.y, '0');
     }
 
     @Override
     public void update() {
-        if (game.getGameMap().getGameCoor(y / Resources.tHeight, x / Resources.tWidth) == '0') {
-            game.getGameMap().setBombCoor(y / Resources.tHeight, x / Resources.tWidth, '0');
+        if (gameMap.getGameCoor(y / Resources.tHeight, x / Resources.tWidth) == '0') {
+            gameMap.setBombCoor(y / Resources.tHeight, x / Resources.tWidth, '0');
         }
 
         if (game.getGameScene1().open() && door.getCurrentFrame() != Resources.portal[3]) {

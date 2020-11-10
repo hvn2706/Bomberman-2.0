@@ -14,6 +14,7 @@ import Bomberman.graphics.gallery.BlueGhost;
 import Bomberman.graphics.gallery.Luigi;
 import Bomberman.graphics.gallery.RedGhost;
 import Bomberman.graphics.gallery.Resources;
+import Bomberman.map.Map;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -31,17 +32,19 @@ public class GameScene1 extends MyScene { // 1 player
     private final Portal portal;
     private int death;
     private long timer = 0;
+    private final Map gameMap;
 
     public GameScene1(Game game) {
         super(game);
-        luigi = new Player(game,71, 71, new Luigi());
-        redGhost1 = new Dummy(game, 522, 266, new RedGhost());
-        redGhost2 = new Dummy(game, 1226, 74, new RedGhost());
-        blueGhost1 = new ABitSmarter(game, 778, 266, new BlueGhost());
-        blueGhost2 = new ABitSmarter(game, 74, 778, new BlueGhost());
+        this.gameMap = new Map("resources/map1.txt");
+        luigi = new Player(game, gameMap, 71, 71, new Luigi());
+        redGhost1 = new Dummy(game, gameMap, 522, 266, new RedGhost());
+        redGhost2 = new Dummy(game, gameMap, 1226, 74, new RedGhost());
+        blueGhost1 = new ABitSmarter(game, gameMap, 778, 266, new BlueGhost());
+        blueGhost2 = new ABitSmarter(game, gameMap, 74, 778, new BlueGhost());
         back = new SceneButton(game, Resources.back1, Resources.back2, 1374, 10);
         soundButton = new SoundButton(game, 1374, 778);
-        portal = new Portal(game, -1, -1);
+        portal = new Portal(game, gameMap, -1, -1);
         portal.init();
         strLuigi = new Status(luigi, 1370, 150);
         enemies = new ArrayList<>();
@@ -51,40 +54,37 @@ public class GameScene1 extends MyScene { // 1 player
         enemies.add(blueGhost2);
     }
 
+    public Map getGameMap() {
+        return gameMap;
+    }
+
     public Player getLuigi() {
         return luigi;
-    }
-
-    public Enemy getRedGhost1() {
-        return redGhost1;
-    }
-
-    public Enemy getRedGhost2() {
-        return redGhost2;
-    }
-
-    public Enemy getBlueGhost1() {
-        return blueGhost1;
-    }
-
-    public Enemy getBlueGhost2() {
-        return blueGhost2;
     }
 
     public Portal getPortal() {
         return portal;
     }
 
-    public void setTimer(long timer) {
-        this.timer = timer;
-    }
-
     public boolean open() {
         return death == enemies.size();
     }
 
+    public void reset() {
+        gameMap.resetMap();
+        luigi.reset();
+        blueGhost1.reset();
+        blueGhost2.reset();
+        redGhost1.reset();
+        redGhost2.reset();
+        portal.init();
+        gameMap.setPortal(portal);
+        timer = 0;
+    }
+
     @Override
     public void update() {
+        gameMap.update();
         luigi.hitMeBabe(enemies);
         death = 0;
         for (Creature en : enemies) {
@@ -117,10 +117,7 @@ public class GameScene1 extends MyScene { // 1 player
 
     @Override
     public void render(Graphics g) {
-        if (game.getGameMap().getGameCoor
-                (portal.getY() / Resources.tHeight, portal.getX() / Resources.tWidth) == '0') {
-            portal.render(g);
-        }
+        gameMap.render(g);
         strLuigi.render(g);
         luigi.render(g);
         blueGhost1.render(g);

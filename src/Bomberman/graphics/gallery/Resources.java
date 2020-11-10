@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.IOException;
 
 public class Resources {
+    public static BufferedImage gameIcon;
     public static BufferedImage menuBG;
     public static BufferedImage onePlayer1;
     public static BufferedImage onePlayer2;
@@ -62,6 +63,7 @@ public class Resources {
     }
 
     public static void init() {
+        gameIcon = loadImage("resources/gameIcon.png");
         BufferedImage tiles = loadImage("resources/tiles.png");
         BufferedImage buttons = loadImage("resources/buttons.png");
         BufferedImage portals = loadImage("resources/doors.png");

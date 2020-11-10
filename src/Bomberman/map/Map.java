@@ -1,5 +1,6 @@
 package Bomberman.map;
 
+import Bomberman.gameObjects.Portal;
 import Bomberman.graphics.Animation;
 import Bomberman.graphics.gallery.Resources;
 
@@ -13,6 +14,7 @@ public class Map {
     private final char[][] gameMap;
     private final char[][] bombMap;
     private final char[][] powerMap;
+    private Portal portal;
     public static final int MAP_WIDTH = 21;
     public static final int MAP_HEIGHT = 14;
 
@@ -27,6 +29,10 @@ public class Map {
         bombMap = new char[100][100];
         powerMap = new char[100][100];
         loadMap(path);
+    }
+
+    public void setPortal(Portal portal) {
+        this.portal = portal;
     }
 
     public char[][] getPowerMap() {
@@ -66,6 +72,9 @@ public class Map {
 
     public void render(Graphics g) {
         g.drawImage(Resources.background2, 0, 0, null);
+        if (portal != null) {
+            portal.render(g);
+        }
         for (int i = 0; i < MAP_HEIGHT; ++i) {
             for (int j = 0; j < MAP_WIDTH; ++j) {
                 if (powerMap[i][j] == '1') {

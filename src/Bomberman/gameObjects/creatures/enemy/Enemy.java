@@ -3,14 +3,15 @@ package Bomberman.gameObjects.creatures.enemy;
 import Bomberman.Game;
 import Bomberman.gameObjects.creatures.Creature;
 import Bomberman.graphics.gallery.Resources;
+import Bomberman.map.Map;
 
 import java.awt.*;
 
 public abstract class Enemy extends Creature {
     protected int choice; // = 1 = up, = 2 = down, = 3 = left, = 4 = right
 
-    public Enemy(Game game, int x, int y, Resources asset) {
-        super(game, x, y, asset);
+    public Enemy(Game game, Map gameMap, int x, int y, Resources asset) {
+        super(game, gameMap, x, y, asset);
         current = asset.Down[0];
         hitBox.x = 10;
         hitBox.y = 18;

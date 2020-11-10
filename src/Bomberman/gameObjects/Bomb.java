@@ -20,15 +20,15 @@ public class Bomb extends GameObject {
     private final char fire = 'f';
     private int check = 0;
 
-    public Bomb(Game game, int x, int y, int bombLength, Player owner) {
-        super(game, x, y);
+    public Bomb(Game game, Map gameMap, int x, int y, int bombLength, Player owner) {
+        super(game, gameMap, x, y);
         this.bombLength = bombLength;
         this.owner = owner;
         isBombed = false;
         lastTime = System.nanoTime();
         coorX = y / Resources.tHeight;
         coorY = x / Resources.tWidth;
-        game.getGameMap().setGameCoor(coorX, coorY, 'b');
+        gameMap.setGameCoor(coorX, coorY, 'b');
         owner.plusCntBomb();
     }
 
@@ -38,18 +38,18 @@ public class Bomb extends GameObject {
 
     public void explode() {
         isBombed = false;
-        char[][] gameMap = game.getGameMap().getGameMap();
-        char[][] bombMap =  game.getGameMap().getBombMap();
-        bombMap[coorX][coorY] = fire;
+        char[][] tmp_gameMap = gameMap.getGameMap();
+        char[][] tmp_bombMap =  gameMap.getBombMap();
+        tmp_bombMap[coorX][coorY] = fire;
         for (int i = 0; i <= bombLength; ++i) { // up
             int nowX = coorX - i;
             if (nowX < Map.MAP_HEIGHT && nowX >= 0) {
-                if (gameMap[nowX][coorY] == '0' || gameMap[nowX][coorY] == 'b') {
-                    bombMap[nowX][coorY] = fire;
-                } else if (gameMap[nowX][coorY] == '1') {
-                    bombMap[nowX][coorY] = fire;
+                if (tmp_gameMap[nowX][coorY] == '0' || tmp_gameMap[nowX][coorY] == 'b') {
+                    tmp_bombMap[nowX][coorY] = fire;
+                } else if (tmp_gameMap[nowX][coorY] == '1') {
+                    tmp_bombMap[nowX][coorY] = fire;
                     break;
-                } else if (gameMap[nowX][coorY] == '2') {
+                } else if (tmp_gameMap[nowX][coorY] == '2') {
                     break;
                 }
             }
@@ -58,12 +58,12 @@ public class Bomb extends GameObject {
         for (int i = 0; i <= bombLength; ++i) { // down
             int nowX = coorX + i;
             if (nowX < Map.MAP_HEIGHT && nowX >= 0) {
-                if (gameMap[nowX][coorY] == '0' || gameMap[nowX][coorY] == 'b') {
-                    bombMap[nowX][coorY] = fire;
-                } else if (gameMap[nowX][coorY] == '1') {
-                    bombMap[nowX][coorY] = fire;
+                if (tmp_gameMap[nowX][coorY] == '0' || tmp_gameMap[nowX][coorY] == 'b') {
+                    tmp_bombMap[nowX][coorY] = fire;
+                } else if (tmp_gameMap[nowX][coorY] == '1') {
+                    tmp_bombMap[nowX][coorY] = fire;
                     break;
-                } else if (gameMap[nowX][coorY] == '2') {
+                } else if (tmp_gameMap[nowX][coorY] == '2') {
                     break;
                 }
             }
@@ -72,12 +72,12 @@ public class Bomb extends GameObject {
         for (int i = 0; i <= bombLength; ++i) { // left
             int nowY = coorY - i;
             if (nowY < Map.MAP_WIDTH && nowY >= 0) {
-                if (gameMap[coorX][nowY] == '0' || gameMap[coorX][nowY] == 'b') {
-                    bombMap[coorX][nowY] = fire;
-                } else if (gameMap[coorX][nowY] == '1') {
-                    bombMap[coorX][nowY] = fire;
+                if (tmp_gameMap[coorX][nowY] == '0' || tmp_gameMap[coorX][nowY] == 'b') {
+                    tmp_bombMap[coorX][nowY] = fire;
+                } else if (tmp_gameMap[coorX][nowY] == '1') {
+                    tmp_bombMap[coorX][nowY] = fire;
                     break;
-                } else if (gameMap[coorX][nowY] == '2') {
+                } else if (tmp_gameMap[coorX][nowY] == '2') {
                     break;
                 }
             }
@@ -86,12 +86,12 @@ public class Bomb extends GameObject {
         for (int i = 0; i <= bombLength; ++i) { // right
             int nowY = coorY + i;
             if (nowY < Map.MAP_WIDTH && nowY >= 0) {
-                if (gameMap[coorX][nowY] == '0' || gameMap[coorX][nowY] == 'b') {
-                    bombMap[coorX][nowY] = fire;
-                } else if (gameMap[coorX][nowY] == '1') {
-                    bombMap[coorX][nowY] = fire;
+                if (tmp_gameMap[coorX][nowY] == '0' || tmp_gameMap[coorX][nowY] == 'b') {
+                    tmp_bombMap[coorX][nowY] = fire;
+                } else if (tmp_gameMap[coorX][nowY] == '1') {
+                    tmp_bombMap[coorX][nowY] = fire;
                     break;
-                } else if (gameMap[coorX][nowY] == '2') {
+                } else if (tmp_gameMap[coorX][nowY] == '2') {
                     break;
                 }
             }
@@ -99,11 +99,11 @@ public class Bomb extends GameObject {
     }
 
     public void finish() {
-        char[][] tmp = game.getGameMap().getGameMap();
-        char[][] tmp_ = game.getGameMap().getBombMap();
-        char[][] tmp__ = game.getGameMap().getPowerMap();
-        game.getGameMap().setBombCoor(coorX, coorY, '0');
-        game.getGameMap().setGameCoor(coorX, coorY, '0');
+        char[][] tmp = gameMap.getGameMap();
+        char[][] tmp_ = gameMap.getBombMap();
+        char[][] tmp__ = gameMap.getPowerMap();
+        gameMap.setBombCoor(coorX, coorY, '0');
+        gameMap.setGameCoor(coorX, coorY, '0');
         for (int i = 0; i < Map.MAP_HEIGHT; ++i) {
             for (int j = 0; j < Map.MAP_WIDTH; ++j) {
                 if (tmp_[i][j] == fire) {

@@ -4,7 +4,6 @@ import Bomberman.graphics.gallery.Resources;
 import Bomberman.graphics.Display;
 import Bomberman.input.KeyManager;
 import Bomberman.input.MouseManager;
-import Bomberman.map.Map;
 import Bomberman.scenes.*;
 import Bomberman.sounds.Playlist;
 
@@ -19,14 +18,10 @@ public class Game implements Runnable {
     private boolean running = false;
     private Thread thread;
 
-    private BufferStrategy bs;
-    private Graphics g;
-
     private final GameScene1 gameScene1;
     private final GameScene2 gameScene2;
     private final MenuScene menuScene;
     private final ResultScene resultScene;
-    private final Map gameMap;
 
     private final KeyManager keyMN = new KeyManager();
     private final MouseManager mouseMN = new MouseManager();
@@ -35,7 +30,6 @@ public class Game implements Runnable {
         Resources.init();
         Playlist.init();
         Playlist.backgroundMusic.playBackground();
-        gameMap = new Map("resources/map1.txt");
         this.width = width;
         this.height = height;
         window = new Display(title, width, height);
@@ -59,37 +53,6 @@ public class Game implements Runnable {
         return mouseMN;
     }
 
-    private void update() {
-        if (MyScene.getCurrentScene() != null) {
-            gameMap.update();
-            MyScene.getCurrentScene().update();
-        } else {
-            System.out.println("no scene found");
-        }
-    }
-
-    private void drawScreen() {
-        bs = window.getCanvas().getBufferStrategy();
-        if (bs == null) {
-            window.getCanvas().createBufferStrategy(3);
-            return;
-        }
-        g = bs.getDrawGraphics();
-        g.clearRect(0, 0, width, height);
-        //draw
-
-        if (MyScene.getCurrentScene() != null) {
-            gameMap.render(g);
-            MyScene.getCurrentScene().render(g);
-        } else {
-            System.out.println("No scene initialized!");
-        }
-
-        //end drawing
-        bs.show();
-        g.dispose();
-    }
-
     public GameScene1 getGameScene1() {
         return gameScene1;
     }
@@ -106,8 +69,33 @@ public class Game implements Runnable {
         return resultScene;
     }
 
-    public Map getGameMap() {
-        return gameMap;
+    private void update() {
+        if (MyScene.getCurrentScene() != null) {
+            MyScene.getCurrentScene().update();
+        } else {
+            System.out.println("no scene found");
+        }
+    }
+
+    private void drawScreen() {
+        BufferStrategy bs = window.getCanvas().getBufferStrategy();
+        if (bs == null) {
+            window.getCanvas().createBufferStrategy(3);
+            return;
+        }
+        Graphics g = bs.getDrawGraphics();
+        g.clearRect(0, 0, width, height);
+        //draw
+
+        if (MyScene.getCurrentScene() != null) {
+            MyScene.getCurrentScene().render(g);
+        } else {
+            System.out.println("No scene initialized!");
+        }
+
+        //end drawing
+        bs.show();
+        g.dispose();
     }
 
     @Override

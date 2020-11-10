@@ -25,8 +25,8 @@ public class ABitSmarter extends Enemy {
     private long lastTime;
     private long timer;
 
-    public ABitSmarter(Game game, int x, int y, Resources asset) {
-        super(game, x, y, asset);
+    public ABitSmarter(Game game, Map gameMap, int x, int y, Resources asset) {
+        super(game, gameMap, x, y, asset);
         pq = new PriorityQueue<>(300, new Cmp());
         path = new ArrayList<>();
         dist = new int[100][100];
@@ -102,7 +102,7 @@ public class ABitSmarter extends Enemy {
     }
 
     public void findPath() {
-        map = game.getGameMap().getGameMap();
+        map = gameMap.getGameMap();
         path.clear();
         for (int i = 0; i < Map.MAP_HEIGHT; ++i) {
             for (int j = 0; j < Map.MAP_WIDTH; ++j) {
