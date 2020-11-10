@@ -1,5 +1,7 @@
 package Bomberman.graphics;
 
+import Bomberman.graphics.gallery.Resources;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -25,6 +27,7 @@ public class Display {
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         window.setResizable(false);
         window.setLocationRelativeTo(null);
+        window.setIconImage(Resources.gameIcon);
 
         canvas = new Canvas();
         canvas.setPreferredSize(new Dimension(width, height));
