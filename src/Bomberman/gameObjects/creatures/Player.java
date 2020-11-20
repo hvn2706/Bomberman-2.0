@@ -1,6 +1,7 @@
 package Bomberman.gameObjects.creatures;
 
 import Bomberman.Game;
+import Bomberman.graphics.gallery.Minotaur;
 import Bomberman.map.Map;
 import Bomberman.sounds.Playlist;
 import Bomberman.gameObjects.Bomb;
@@ -17,6 +18,13 @@ public class Player extends Creature {
     private int cntBomb;
     private int bombLength;
     private final String name;
+    public boolean input = false;
+
+    public boolean up = false;
+    public boolean down = false;
+    public boolean left = false;
+    public boolean right = false;
+    public boolean toggle = false;
 
     private static int cnt = 0;
     private final int stable;
@@ -26,17 +34,19 @@ public class Player extends Creature {
         current = asset.Down[0];
         cnt++;
         stable = cnt;
-        hitBox.x = 10;
-        hitBox.y = 18;
-        hitBox.width = 30;
-        hitBox.height = 32;
+        hitBox.x = 6;
+        hitBox.y = 9;
+        hitBox.width = 20;
+        hitBox.height = 20;
         cntBomb = 0;
         bagCapacity = 1;
         bombLength = 1;
         if (asset instanceof Luigi) {
             name = "Luigi";
-        } else {
+        } else if (asset instanceof Minotaur) {
             name = "Minotaur";
+        } else {
+            name = "Nigga";
         }
     }
 
@@ -45,104 +55,51 @@ public class Player extends Creature {
         if (alive) {
             yMove = 0;
             xMove = 0;
+            toggleUpdate();
+            up = false;
+            down = false;
+            left = false;
+            right = false;
+            toggle = false;
             checkAlive();
             aDown.update();
             aUp.update();
             aLeft.update();
             aRight.update();
             powerUpdate();
-            if (stable == 1 || stable == 3) {
+            if (stable == 1 || stable == 3 || input) {
                 if (!game.getKeyMN().keys[KeyEvent.VK_SPACE]) {
                     if (game.getKeyMN().keys[KeyEvent.VK_W]) {
-                        current = asset.Up[0];
-                        yMove -= speed;
+                        up = true;
                     }
                     if (game.getKeyMN().keys[KeyEvent.VK_S]) {
-                        current = asset.Down[0];
-                        yMove += speed;
+                        down = true;
                     }
                     if (game.getKeyMN().keys[KeyEvent.VK_A]) {
-                        current = asset.Left[0];
-                        xMove -= speed;
+                        left = true;
                     }
                     if (game.getKeyMN().keys[KeyEvent.VK_D]) {
-                        current = asset.Right[0];
-                        xMove += speed;
+                        right = true;
                     }
                 } else if (game.getKeyMN().keys[KeyEvent.VK_SPACE]) {
-                    if (cntBomb >= 0) {
-                        int xBomb = 0;
-                        int yBomb = 0;
-
-                        if ((x + hitBox.x + hitBox.width) % Resources.tWidth > 32) {
-                            yBomb = (x + hitBox.x + hitBox.width) / Resources.tWidth;
-                        } else if ((x + hitBox.x + hitBox.width) % Resources.tWidth <= 32) {
-                            yBomb = (x + hitBox.x) / Resources.tWidth;
-                        }
-
-                        if ((y + hitBox.y + hitBox.height) % Resources.tHeight > 32) {
-                            xBomb = (y + hitBox.y + hitBox.height) / Resources.tHeight;
-                        } else if ((y + hitBox.y + hitBox.height) % Resources.tHeight <= 32) {
-                            xBomb = (y + hitBox.y) / Resources.tHeight;
-                        }
-
-                        char gameCoor = gameMap.getGameCoor(xBomb, yBomb);
-
-                        if (cntBomb < bagCapacity && gameCoor == '0' &&
-                           (xBomb != game.getGameScene1().getPortal().getY() / Resources.tWidth ||
-                            yBomb != game.getGameScene1().getPortal().getX() / Resources.tWidth)) {
-                            Playlist.setBomb.play();
-                            Bomb bomb = new Bomb(game, gameMap, yBomb * Resources.tWidth,
-                                    xBomb * Resources.tHeight, bombLength, this);
-                            bombs.add(bomb);
-                            bomb.setBombed(true);
-                        }
-                    }
+                    toggle = true;
                 }
             } else if (stable == 2) {
                 if (!game.getKeyMN().keys[KeyEvent.VK_P]) {
                     if (game.getKeyMN().keys[KeyEvent.VK_UP]) {
-                        current = asset.Up[0];
-                        yMove -= speed;
+                        up = true;
                     }
                     if (game.getKeyMN().keys[KeyEvent.VK_DOWN]) {
-                        current = asset.Down[0];
-                        yMove += speed;
+                        down = true;
                     }
                     if (game.getKeyMN().keys[KeyEvent.VK_LEFT]) {
-                        current = asset.Left[0];
-                        xMove -= speed;
+                        left = true;
                     }
                     if (game.getKeyMN().keys[KeyEvent.VK_RIGHT]) {
-                        current = asset.Right[0];
-                        xMove += speed;
+                        right = true;
                     }
                 } else if (game.getKeyMN().keys[KeyEvent.VK_P]) {
-                    if (cntBomb >= 0) {
-                        int xBomb = 0;
-                        int yBomb = 0;
-
-                        if ((x + hitBox.x + hitBox.width) % Resources.tWidth > 32) {
-                            yBomb = (x + hitBox.x + hitBox.width) / Resources.tWidth;
-                        } else if ((x + hitBox.x + hitBox.width) % Resources.tWidth <= 32) {
-                            yBomb = (x + hitBox.x) / Resources.tWidth;
-                        }
-
-                        if ((y + hitBox.y + hitBox.height) % Resources.tHeight > 32) {
-                            xBomb = (y + hitBox.y + hitBox.height) / Resources.tHeight;
-                        } else if ((y + hitBox.y + hitBox.height) % Resources.tHeight <= 32) {
-                            xBomb = (y + hitBox.y) / Resources.tHeight;
-                        }
-
-                        char gameCoor = gameMap.getGameCoor(xBomb, yBomb);
-                        if (cntBomb < bagCapacity && gameCoor == '0') {
-                            Playlist.setBomb.play();
-                            Bomb bomb = new Bomb(game, gameMap, yBomb * Resources.tWidth,
-                                    xBomb * Resources.tHeight, bombLength, this);
-                            bombs.add(bomb);
-                            bomb.setBombed(true);
-                        }
-                    }
+                    toggle = true;
                 }
             }
         }
@@ -153,21 +110,70 @@ public class Player extends Creature {
         move();
     }
 
-    public void powerUpdate() {
+    private void toggleUpdate() {
+        if (up) {
+            current = asset.Up[0];
+            yMove -= speed;
+        }
+        if (down) {
+            current = asset.Down[0];
+            yMove += speed;
+        }
+        if (left) {
+            current = asset.Left[0];
+            xMove -= speed;
+        }
+        if (right) {
+            current = asset.Right[0];
+            xMove += speed;
+        }
+        if (toggle) {
+            if (cntBomb >= 0) {
+                int xBomb = 0;
+                int yBomb = 0;
+
+                if ((x + hitBox.x + hitBox.width) % Resources.tWidth > Resources.tWidth / 2) {
+                    yBomb = (x + hitBox.x + hitBox.width) / Resources.tWidth;
+                } else if ((x + hitBox.x + hitBox.width) % Resources.tWidth <= Resources.tWidth / 2) {
+                    yBomb = (x + hitBox.x) / Resources.tWidth;
+                }
+
+                if ((y + hitBox.y + hitBox.height) % Resources.tHeight > Resources.tWidth / 2) {
+                    xBomb = (y + hitBox.y + hitBox.height) / Resources.tHeight;
+                } else if ((y + hitBox.y + hitBox.height) % Resources.tHeight <= Resources.tWidth / 2) {
+                    xBomb = (y + hitBox.y) / Resources.tHeight;
+                }
+
+                char gameCoor = gameMap.getGameCoor(xBomb, yBomb);
+
+                if (cntBomb < bagCapacity && gameCoor == '0' &&
+                        (xBomb != game.getGameScene1().getPortal().getY() / Resources.tWidth ||
+                                yBomb != game.getGameScene1().getPortal().getX() / Resources.tWidth)) {
+                    Playlist.setBomb.play();
+                    Bomb bomb = new Bomb(game, gameMap, yBomb * Resources.tWidth,
+                            xBomb * Resources.tHeight, bombLength, this);
+                    bombs.add(bomb);
+                    bomb.setBombed(true);
+                }
+            }
+        }
+    }
+
+    private void powerUpdate() {
         char[][] tmp = gameMap.getPowerMap();
 
-        if (tmp[(y + Resources.tWidth / 2) / 64][(x + Resources.pHeight / 2) / 64] == '1') {
+        if (tmp[(y + Resources.tWidth / 2) / Resources.tWidth][(x + Resources.pHeight / 2) / Resources.tWidth] == '1') {
             Playlist.eatPower.play();
             bombLength++;
-            tmp[(y + Resources.tWidth / 2) / 64][(x + Resources.pHeight / 2) / 64] = '0';
-        } else if (tmp[(y + Resources.tWidth / 2) / 64][(x + Resources.pHeight / 2) / 64] == '2') {
+            tmp[(y + Resources.tWidth / 2) / Resources.tWidth][(x + Resources.pHeight / 2) / Resources.tWidth] = '0';
+        } else if (tmp[(y + Resources.tWidth / 2) / Resources.tWidth][(x + Resources.pHeight / 2) / Resources.tWidth] == '2') {
             Playlist.eatPower.play();
-            speed += 0.25f;
-            tmp[(y + Resources.tWidth / 2) / 64][(x + Resources.pHeight / 2) / 64] = '0';
-        } else if (tmp[(y + Resources.tWidth / 2) / 64][(x + Resources.pHeight / 2) / 64] == '3') {
+            speed ++;
+            tmp[(y + Resources.tWidth / 2) / Resources.tWidth][(x + Resources.pHeight / 2) / Resources.tWidth] = '0';
+        } else if (tmp[(y + Resources.tWidth / 2) / Resources.tWidth][(x + Resources.pHeight / 2) / Resources.tWidth] == '3') {
             Playlist.eatPower.play();
             bagCapacity++;
-            tmp[(y + Resources.tWidth / 2) / 64][(x + Resources.pHeight / 2) / 64] = '0';
+            tmp[(y + Resources.tWidth / 2) / Resources.tWidth][(x + Resources.pHeight / 2) / Resources.tWidth] = '0';
         }
     }
 
