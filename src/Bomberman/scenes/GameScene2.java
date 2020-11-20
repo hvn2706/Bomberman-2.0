@@ -24,7 +24,7 @@ public class GameScene2 extends MyScene { // 2 player
 
     public GameScene2(Game game) {
         super(game);
-        gameMap = new Map("resources/map1.txt", 35);
+        gameMap = new Map("resources/map1.txt", 18);
         minotaur = new Player(game, gameMap, 764, 484, new Minotaur());
         luigi = new Player(game, gameMap, 44, 44, new Luigi());
         back = new SceneButton(game, Resources.back1, Resources.back2, 860, 6);
