@@ -25,10 +25,11 @@ public class GameScene3 extends MyScene {
     private final Status strMinotaur;
     private final Map gameMap;
     private long timer = 0;
+    private boolean mapIsUpdated = false;
 
     public GameScene3(Game game) {
         super(game);
-        gameMap = new Map("resources/map1.txt", 35);
+        gameMap = new Map("resources/map1.txt", 18);
         minotaur = new Player(game, gameMap, 764, 484, new Minotaur());
         luigi = new Player(game, gameMap, 44, 44, new Luigi());
         back = new SceneButton(game, Resources.back1, Resources.back2, 860, 6);
@@ -83,9 +84,12 @@ public class GameScene3 extends MyScene {
             int startIndex = 0;
             if (!Game.serverRunning) {
                 startIndex = Map.MAP_HEIGHT;
-                for (int i = 0; i < Map.MAP_HEIGHT; ++i) {
-                    for (int j = 0; j < Map.MAP_WIDTH; ++j) {
-                        gameMap.setPowerCoor(i, j, msg[i + 1].charAt(j));
+                if (!mapIsUpdated) {
+                    mapIsUpdated = true;
+                    for (int i = 0; i < Map.MAP_HEIGHT; ++i) {
+                        for (int j = 0; j < Map.MAP_WIDTH; ++j) {
+                            gameMap.setPowerCoor(i, j, msg[i + 1].charAt(j));
+                        }
                     }
                 }
             }
