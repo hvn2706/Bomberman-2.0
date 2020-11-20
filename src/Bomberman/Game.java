@@ -4,9 +4,12 @@ import Bomberman.graphics.gallery.Resources;
 import Bomberman.graphics.Display;
 import Bomberman.input.KeyManager;
 import Bomberman.input.MouseManager;
+import Bomberman.network.Client;
+import Bomberman.network.Server;
 import Bomberman.scenes.*;
 import Bomberman.sounds.Playlist;
 
+import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferStrategy;
 
@@ -20,11 +23,18 @@ public class Game implements Runnable {
 
     private final GameScene1 gameScene1;
     private final GameScene2 gameScene2;
+    private final GameScene3 gameScene3;
     private final MenuScene menuScene;
     private final ResultScene resultScene;
 
     private final KeyManager keyMN = new KeyManager();
     private final MouseManager mouseMN = new MouseManager();
+
+    private final Font font;
+    private int displayFPS;
+
+    public Server server;
+    public static boolean serverRunning = false;
 
     public Game(String title, int width, int height) {
         Resources.init();
@@ -40,9 +50,21 @@ public class Game implements Runnable {
         window.getCanvas().addMouseMotionListener(mouseMN);
         gameScene1 = new GameScene1(this);
         gameScene2 = new GameScene2(this);
+
+        if (JOptionPane.showConfirmDialog(window.getWindow(), "Do you want to run the server") == 0) {
+            server = new Server();
+            server.start();
+            serverRunning = true;
+        } else {
+            serverRunning = false;
+        }
+        Client.runClient();
+
+        gameScene3 = new GameScene3(this);
         menuScene = new MenuScene(this);
         resultScene = new ResultScene(this);
         MyScene.setCurrentScene(menuScene);
+        font = new Font(Font.MONOSPACED, Font.BOLD, 20);
     }
 
     public KeyManager getKeyMN() {
@@ -59,6 +81,10 @@ public class Game implements Runnable {
 
     public GameScene2 getGameScene2() {
         return gameScene2;
+    }
+
+    public GameScene3 getGameScene3() {
+        return gameScene3;
     }
 
     public MenuScene getMenuScene() {
@@ -92,6 +118,8 @@ public class Game implements Runnable {
         } else {
             System.out.println("No scene initialized!");
         }
+        g.setFont(font);
+        g.drawString("FPS: " + displayFPS, 1380, 852);
 
         //end drawing
         bs.show();
@@ -122,7 +150,7 @@ public class Game implements Runnable {
             }
 
             if (timer >= 1000000000) {
-                System.out.println("fps:" + ticks);
+                displayFPS = ticks;
                 ticks = 0;
                 timer = 0;
             }
@@ -140,11 +168,9 @@ public class Game implements Runnable {
     }
 
     public synchronized void stop() {
-        if (!running) {
-            return;
-        }
         running = false;
         try {
+            Playlist.close();
             thread.join();
         } catch (Exception e) {
             e.printStackTrace();
