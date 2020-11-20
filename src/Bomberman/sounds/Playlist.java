@@ -12,4 +12,11 @@ public class Playlist {
         explosion = new SoundEffect("resources/explosion.wav");
         backgroundMusic = new SoundEffect("resources/STRLGHT - Clutch.wav");
     }
+
+    public static void close() {
+        backgroundMusic.close();
+        setBomb.close();
+        eatPower.close();
+        explosion.close();
+    }
 }

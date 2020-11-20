@@ -7,7 +7,7 @@ import java.io.File;
 
 public class SoundEffect {
     public static boolean isOn = true;
-    Clip clip;
+    private Clip clip;
 
     public SoundEffect(String path) {
         try {
@@ -36,5 +36,9 @@ public class SoundEffect {
 
     public void stopBackground() {
         clip.stop();
+    }
+
+    public void close() {
+        clip.close();
     }
 }
