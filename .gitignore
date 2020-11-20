@@ -1,4 +1,6 @@
 /.idea
 /out
 *.iml
+*.jar
+*.INF
 *.class
