@@ -22,11 +22,10 @@ public abstract class Creature extends GameObject {
     protected final Animation aLeft;
     protected final Animation aRight;
     protected BufferedImage current;
-
     public boolean alive;
-    protected final float DEFAULT_SPEED = 4.0f;
+    protected final int DEFAULT_SPEED = 2;
     protected float speed = DEFAULT_SPEED;
-    protected final long frameSpeed = 60000000;
+    protected final long frameSpeed = 70000000;
     protected long deadTimer;
     protected long deadNow = 0;
 
@@ -78,13 +77,13 @@ public abstract class Creature extends GameObject {
     }
 
     public BufferedImage getFrame() {
-        if (yMove > 0) {
+        if (yMove > 0) { // down
             return aDown.getCurrentFrame();
-        } else if (yMove < 0) {
+        } else if (yMove < 0) { // up
             return aUp.getCurrentFrame();
-        } else if (xMove < 0) {
+        } else if (xMove < 0) { // left
             return aLeft.getCurrentFrame();
-        } else if (xMove > 0) {
+        } else if (xMove > 0) { // right
             return aRight.getCurrentFrame();
         }
         return current;
@@ -101,7 +100,7 @@ public abstract class Creature extends GameObject {
         if (xMove > 0) { // right
             xx = (x + xMove + hitBox.x + hitBox.width) / Resources.tWidth;
             if (this instanceof Enemy) {
-                xx = (x + xMove + hitBox.x + hitBox.width + 16) / Resources.tWidth;
+                xx = (x + xMove + hitBox.x + hitBox.width + 8) / Resources.tWidth;
             }
             tmp1 = gameMap.getGameCoor(yy1, xx);
             tmp2 = gameMap.getGameCoor(yy2, xx);
@@ -118,7 +117,7 @@ public abstract class Creature extends GameObject {
         } else if (xMove < 0) { // left
             xx = (x + xMove + hitBox.x) / Resources.tWidth;
             if (this instanceof Enemy) {
-                xx = (x + xMove + hitBox.x - 16) / Resources.tWidth;
+                xx = (x + xMove + hitBox.x - 8) / Resources.tWidth;
             }
             tmp1 = gameMap.getGameCoor(yy1, xx);
             tmp2 = gameMap.getGameCoor(yy2, xx);
@@ -141,7 +140,7 @@ public abstract class Creature extends GameObject {
         if (yMove < 0) { // up
             yy = (y + yMove + hitBox.y) / Resources.tHeight;
             if (this instanceof Enemy) {
-                yy = (y + yMove + hitBox.y - 16) / Resources.tHeight;
+                yy = (y + yMove + hitBox.y - 8) / Resources.tHeight;
             }
             tmp1 = gameMap.getGameCoor(yy, xx1);
             tmp2 = gameMap.getGameCoor(yy, xx2);
@@ -158,7 +157,7 @@ public abstract class Creature extends GameObject {
         } else if (yMove > 0) { // down
             yy = (y + yMove + hitBox.y + hitBox.height) / Resources.tHeight;
             if (this instanceof Enemy) {
-                yy = (y + yMove + hitBox.y + hitBox.height + 16) / Resources.tHeight;
+                yy = (y + yMove + hitBox.y + hitBox.height + 8) / Resources.tHeight;
             }
             tmp1 = gameMap.getGameCoor(yy, xx1);
             tmp2 = gameMap.getGameCoor(yy, xx2);

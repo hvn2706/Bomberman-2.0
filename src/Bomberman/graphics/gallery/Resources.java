@@ -12,6 +12,8 @@ public class Resources {
     public static BufferedImage onePlayer2;
     public static BufferedImage twoPlayer1;
     public static BufferedImage twoPlayer2;
+    public static BufferedImage multiPlayer1;
+    public static BufferedImage multiPlayer2;
     public static BufferedImage back1;
     public static BufferedImage back2;
     public static BufferedImage sound1;
@@ -25,7 +27,6 @@ public class Resources {
     public static BufferedImage chest;
     public static BufferedImage greyBrick;
     public static BufferedImage luigi;
-    public static BufferedImage werewolf;
     public static BufferedImage minotaur;
     public static BufferedImage redGhost;
     public static BufferedImage blueGhost;
@@ -36,10 +37,10 @@ public class Resources {
     public static BufferedImage sparkleOrb;
     public static BufferedImage dead;
 
-    public static final int pWidth = 50;
-    public static final int pHeight = 50;
-    public static final int tWidth = 64;
-    public static final int tHeight = 64;
+    public static final int pWidth = 32;
+    public static final int pHeight = 32;
+    public static final int tWidth = 40;
+    public static final int tHeight = 40;
 
     public static BufferedImage[] bomb = new BufferedImage[5];
     public static BufferedImage[] explosion = new BufferedImage[5];
@@ -75,7 +76,6 @@ public class Resources {
         background2 = loadImage("resources/floor.png");
         bombs = loadImage("resources/bomb.png");
         luigi = loadImage("resources/luigi.png");
-        werewolf = loadImage("resources/wolf.png");
         minotaur = loadImage("resources/minotaur.png");
         redGhost = loadImage("resources/ghost1.png");
         blueGhost = loadImage("resources/ghost2.png");
@@ -85,15 +85,17 @@ public class Resources {
         sparkleOrb = loadImage("resources/power3.png");
         dead = loadImage("resources/skull.png");
 
-        onePlayer1 = buttons.getSubimage(0, 0, 320, 128);
-        onePlayer2 = buttons.getSubimage(0, 128, 320, 128);
-        twoPlayer1 = buttons.getSubimage(0, 256, 320, 128);
-        twoPlayer2 = buttons.getSubimage(0, 384, 320, 128);
-        back1 = buttons.getSubimage(0, 512, 196, 64);
-        back2 = buttons.getSubimage(0, 576, 196, 64);
-        sound1 = buttons.getSubimage(0, 640, 196, 64);
-        sound2 = buttons.getSubimage(0, 704, 196, 64);
-        sound3 = buttons.getSubimage(0, 768, 196, 64);
+        onePlayer1 = buttons.getSubimage(0, 0, 200, 80);
+        onePlayer2 = buttons.getSubimage(0, 80, 200, 80);
+        twoPlayer1 = buttons.getSubimage(0, 160, 200, 80);
+        twoPlayer2 = buttons.getSubimage(0, 240, 200, 80);
+        multiPlayer1 = buttons.getSubimage(200, 0, 200, 80);
+        multiPlayer2 = buttons.getSubimage(200, 80, 200, 80);
+        back1 = buttons.getSubimage(0, 320, 120, 40);
+        back2 = buttons.getSubimage(0, 360, 120, 40);
+        sound1 = buttons.getSubimage(0, 400, 120, 40);
+        sound2 = buttons.getSubimage(0, 440, 120, 40);
+        sound3 = buttons.getSubimage(0, 480, 120, 40);
 
         chest = tiles.getSubimage(tWidth * 6, 0, tWidth, tHeight);
         greyBrick = tiles.getSubimage(tWidth * 4, 0, tWidth, tHeight);

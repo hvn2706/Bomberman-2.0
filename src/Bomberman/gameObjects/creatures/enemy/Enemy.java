@@ -13,10 +13,10 @@ public abstract class Enemy extends Creature {
     public Enemy(Game game, Map gameMap, int x, int y, Resources asset) {
         super(game, gameMap, x, y, asset);
         current = asset.Down[0];
-        hitBox.x = 10;
-        hitBox.y = 18;
-        hitBox.width = 30;
-        hitBox.height = 32;
+        hitBox.x = 6;
+        hitBox.y = 6;
+        hitBox.width = 20;
+        hitBox.height = 20;
     }
 
     public abstract void makeChoice();

@@ -13,7 +13,7 @@ public class ResultScene extends MyScene {
 
     public ResultScene(Game game) {
         super(game);
-        back = new SceneButton(game, Resources.back1, Resources.back2, 702, 640);
+        back = new SceneButton(game, Resources.back1, Resources.back2, 440, 500);
     }
 
     public void setResult(BufferedImage result) {

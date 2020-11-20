@@ -14,6 +14,7 @@ public class Map {
     private final char[][] gameMap;
     private final char[][] bombMap;
     private final char[][] powerMap;
+    private final int chance;
     private Portal portal;
     public static final int MAP_WIDTH = 21;
     public static final int MAP_HEIGHT = 14;
@@ -23,8 +24,9 @@ public class Map {
     private final Animation power2 = new Animation(Resources.power2, 90000000);
     private final Animation power3 = new Animation(Resources.power3, 90000000);
 
-    public Map(String path) {
+    public Map(String path, int chance) {
         this.path = path;
+        this.chance = chance;
         gameMap = new char[100][100];
         bombMap = new char[100][100];
         powerMap = new char[100][100];
@@ -33,6 +35,10 @@ public class Map {
 
     public void setPortal(Portal portal) {
         this.portal = portal;
+    }
+
+    public char[][] getGameMap() {
+        return gameMap;
     }
 
     public char[][] getPowerMap() {
@@ -49,10 +55,6 @@ public class Map {
 
     public void setPowerCoor(int x, int y, char c) {
         powerMap[x][y] = c;
-    }
-
-    public char[][] getGameMap() {
-        return gameMap;
     }
 
     public char getGameCoor(int x, int y) {
@@ -124,7 +126,7 @@ public class Map {
                     gameMap[i][j] = tmp.charAt(j);
                     if (gameMap[i][j] == '1') {
                         int rand_int = rand.nextInt(100);
-                        if (rand_int < 24) {
+                        if (rand_int < chance) {
                             if (rand_int % 3 == 0) {
                                 powerMap[i][j] = '1';
                             } else if (rand_int % 3 == 1) {
@@ -136,6 +138,7 @@ public class Map {
                     }
                 }
             }
+            sc.close();
         } catch (Exception e) {
             e.printStackTrace();
         }

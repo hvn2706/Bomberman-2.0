@@ -24,13 +24,13 @@ public class GameScene2 extends MyScene { // 2 player
 
     public GameScene2(Game game) {
         super(game);
-        gameMap = new Map("resources/map1.txt");
-        minotaur = new Player(game, gameMap, 1230, 778, new Minotaur());
-        luigi = new Player(game, gameMap, 71, 71, new Luigi());
-        back = new SceneButton(game, Resources.back1, Resources.back2, 1374, 10);
-        soundButton = new SoundButton(game, 1374, 778);
-        strLuigi = new Status(luigi, 1370, 150);
-        strMinotaur = new Status(minotaur, 1370, 300);
+        gameMap = new Map("resources/map1.txt", 35);
+        minotaur = new Player(game, gameMap, 764, 484, new Minotaur());
+        luigi = new Player(game, gameMap, 44, 44, new Luigi());
+        back = new SceneButton(game, Resources.back1, Resources.back2, 860, 6);
+        soundButton = new SoundButton(game, 860, 486);
+        strLuigi = new Status(luigi, 856, 94);
+        strMinotaur = new Status(minotaur, 856, 188);
     }
 
     public Map getGameMap() {

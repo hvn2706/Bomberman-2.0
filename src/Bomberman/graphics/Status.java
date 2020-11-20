@@ -16,7 +16,7 @@ public class Status {
         this.x = x;
         this.y = y;
         str = "";
-        font = new Font(Font.MONOSPACED, Font.BOLD, 20);
+        font = new Font(Font.MONOSPACED, Font.BOLD, 12);
     }
 
     public void render(Graphics g) {

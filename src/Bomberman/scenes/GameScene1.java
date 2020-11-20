@@ -36,17 +36,17 @@ public class GameScene1 extends MyScene { // 1 player
 
     public GameScene1(Game game) {
         super(game);
-        this.gameMap = new Map("resources/map1.txt");
-        luigi = new Player(game, gameMap, 71, 71, new Luigi());
-        redGhost1 = new Dummy(game, gameMap, 522, 266, new RedGhost());
-        redGhost2 = new Dummy(game, gameMap, 1226, 74, new RedGhost());
-        blueGhost1 = new ABitSmarter(game, gameMap, 778, 266, new BlueGhost());
-        blueGhost2 = new ABitSmarter(game, gameMap, 74, 778, new BlueGhost());
-        back = new SceneButton(game, Resources.back1, Resources.back2, 1374, 10);
-        soundButton = new SoundButton(game, 1374, 778);
+        this.gameMap = new Map("resources/map1.txt", 10);
+        luigi = new Player(game, gameMap, 44, 44, new Luigi());
+        redGhost1 = new Dummy(game, gameMap, 324, 164, new RedGhost());
+        redGhost2 = new Dummy(game, gameMap, 764, 44, new RedGhost());
+        blueGhost1 = new ABitSmarter(game, gameMap, 483, 163, new BlueGhost());
+        blueGhost2 = new ABitSmarter(game, gameMap, 43, 483, new BlueGhost());
+        back = new SceneButton(game, Resources.back1, Resources.back2, 860, 6);
+        soundButton = new SoundButton(game, 860, 486);
         portal = new Portal(game, gameMap, -1, -1);
         portal.init();
-        strLuigi = new Status(luigi, 1370, 150);
+        strLuigi = new Status(luigi, 856, 94);
         enemies = new ArrayList<>();
         enemies.add(redGhost1);
         enemies.add(redGhost2);

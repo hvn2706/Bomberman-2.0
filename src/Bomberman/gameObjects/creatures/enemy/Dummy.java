@@ -11,7 +11,7 @@ public class Dummy extends Enemy {
 
     public Dummy(Game game, Map gameMap, int x, int y, Resources asset) {
         super(game, gameMap, x, y, asset);
-        speed = 2.5f;
+        speed = 1;
     }
 
     @Override

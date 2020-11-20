@@ -124,10 +124,10 @@ public class ABitSmarter extends Enemy {
         lastTime = System.nanoTime();
         if (timer > 1500000000) {
             timer = 0;
-            if (speed == 2.5f) {
-                speed = 4.5f;
+            if (speed == 1.0f) {
+                speed = 3.0f;
             } else {
-                speed = 2.5f;
+                speed = 1.0f;
             }
         }
 
