@@ -5,8 +5,8 @@
     - [Description](#Description-)
     - [Assets](#Assets-)
     - [Sounds](#Sounds-)
-    - [How to compile and run](#How to compile and run-)
-    - [How to play](#How to play-)
+    - [How to compile and run](#How_to_compile_and_run-)
+    - [How to play](#How_to_play-)
     - [Credits](#Credits-)
 ## Description
 - OOP class project.
