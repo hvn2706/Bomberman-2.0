@@ -2,12 +2,12 @@
 
 ## Navigation
 - [Bomberman-2.0](#Bomberman-2.0)
-    - [Description](#Description-)
-    - [Assets](#Assets-)
-    - [Sounds](#Sounds-)
+    - [Description](#Description)
+    - [Assets](#Assets)
+    - [Sounds](#Sounds)
     - [How to compile and run](#How_to_compile_and_run)
     - [How to play](#How_to_play)
-    - [Credits](#Credits-)
+    - [Credits](#Credits)
 ## Description
 - OOP class project.
 - A better version of my [c++ Bomberman](https://github.com/Darthveloper21/Bomberman-UET)
