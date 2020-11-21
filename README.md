@@ -5,9 +5,9 @@
     - [Description](#Description)
     - [Assets](#Assets)
     - [Sounds](#Sounds)
-    - [How to compile and run](#How_to_compile_and_run)
-    - [How to play](#How_to_play)
-    - [Credits](#Credits)
+    - [How to compile and run](#How-to-compile-and-run)
+    - [How to play](#How-to-play)
+    - [Credit](#Credit)
 ## Description
 - OOP class project.
 - A better version of my [c++ Bomberman](https://github.com/Darthveloper21/Bomberman-UET)
