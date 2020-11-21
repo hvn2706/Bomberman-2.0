@@ -12,8 +12,10 @@ public class Resources {
     public static BufferedImage onePlayer2;
     public static BufferedImage twoPlayer1;
     public static BufferedImage twoPlayer2;
-    public static BufferedImage multiPlayer1;
-    public static BufferedImage multiPlayer2;
+    public static BufferedImage offline1;
+    public static BufferedImage offline2;
+    public static BufferedImage online1;
+    public static BufferedImage online2;
     public static BufferedImage back1;
     public static BufferedImage back2;
     public static BufferedImage sound1;
@@ -89,8 +91,10 @@ public class Resources {
         onePlayer2 = buttons.getSubimage(0, 80, 200, 80);
         twoPlayer1 = buttons.getSubimage(0, 160, 200, 80);
         twoPlayer2 = buttons.getSubimage(0, 240, 200, 80);
-        multiPlayer1 = buttons.getSubimage(200, 0, 200, 80);
-        multiPlayer2 = buttons.getSubimage(200, 80, 200, 80);
+        offline1 = buttons.getSubimage(200, 0, 200, 80);
+        offline2 = buttons.getSubimage(200, 80, 200, 80);
+        online1 = buttons.getSubimage(200, 160, 200, 80);
+        online2 = buttons.getSubimage(200, 240, 200, 80);
         back1 = buttons.getSubimage(0, 320, 120, 40);
         back2 = buttons.getSubimage(0, 360, 120, 40);
         sound1 = buttons.getSubimage(0, 400, 120, 40);
