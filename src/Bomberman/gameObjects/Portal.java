@@ -40,10 +40,6 @@ public class Portal extends GameObject {
 
     @Override
     public void update() {
-        if (gameMap.getGameCoor(y / Resources.tHeight, x / Resources.tWidth) == '0') {
-            gameMap.setBombCoor(y / Resources.tHeight, x / Resources.tWidth, '0');
-        }
-
         if (game.getGameScene1().open() && door.getCurrentFrame() != Resources.portal[3]) {
             door.update();
         }

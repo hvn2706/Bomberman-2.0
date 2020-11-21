@@ -93,8 +93,7 @@ public class Map {
                 if (bombMap[i][j] == 'f') {
                     g.drawImage(explosion.getCurrentFrame(), j * Resources.tHeight,
                             i * Resources.tWidth, null);
-                }
-                else {
+                } else {
                     if (gameMap[i][j] == '2') {
                         g.drawImage(Resources.greyBrick, j * Resources.tHeight,
                                 i * Resources.tWidth, null);
