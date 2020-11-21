@@ -11,20 +11,22 @@ import Bomberman.sounds.Playlist;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.awt.image.BufferStrategy;
 
-public class Game implements Runnable {
+public class Game {
     public final Display window;
     public int width;
     public int height;
 
-    private boolean running = false;
-    private Thread thread;
+    private boolean running = true;
 
     private final GameScene1 gameScene1;
     private final GameScene2 gameScene2;
     private final GameScene3 gameScene3;
     private final MenuScene menuScene;
+    private final OptionScene optionScene;
     private final ResultScene resultScene;
 
     private final KeyManager keyMN = new KeyManager();
@@ -48,6 +50,44 @@ public class Game implements Runnable {
         window.getWindow().addMouseMotionListener(mouseMN);
         window.getCanvas().addMouseListener(mouseMN);
         window.getCanvas().addMouseMotionListener(mouseMN);
+        window.getWindow().addWindowListener(new WindowListener() {
+            @Override
+            public void windowOpened(WindowEvent e) {
+
+            }
+
+            @Override
+            public void windowClosing(WindowEvent e) {
+
+            }
+
+            @Override
+            public void windowClosed(WindowEvent e) {
+                running = false;
+                Playlist.close();
+                System.out.println("close");
+            }
+
+            @Override
+            public void windowIconified(WindowEvent e) {
+
+            }
+
+            @Override
+            public void windowDeiconified(WindowEvent e) {
+
+            }
+
+            @Override
+            public void windowActivated(WindowEvent e) {
+
+            }
+
+            @Override
+            public void windowDeactivated(WindowEvent e) {
+
+            }
+        });
         gameScene1 = new GameScene1(this);
         gameScene2 = new GameScene2(this);
 
@@ -62,9 +102,10 @@ public class Game implements Runnable {
 
         gameScene3 = new GameScene3(this);
         menuScene = new MenuScene(this);
+        optionScene = new OptionScene(this);
         resultScene = new ResultScene(this);
         MyScene.setCurrentScene(menuScene);
-        font = new Font(Font.MONOSPACED, Font.BOLD, 20);
+        font = new Font(Font.MONOSPACED, Font.BOLD, 14);
     }
 
     public KeyManager getKeyMN() {
@@ -89,6 +130,10 @@ public class Game implements Runnable {
 
     public MenuScene getMenuScene() {
         return menuScene;
+    }
+
+    public OptionScene getOptionScene() {
+        return optionScene;
     }
 
     public ResultScene getResultScene() {
@@ -119,14 +164,13 @@ public class Game implements Runnable {
             System.out.println("No scene initialized!");
         }
         g.setFont(font);
-        g.drawString("FPS: " + displayFPS, 1380, 852);
+        g.drawString("FPS: " + displayFPS, 862, 532);
 
         //end drawing
         bs.show();
         g.dispose();
     }
 
-    @Override
     public void run() {
         int fps = 60;
         double perFrame = 1000000000 / (double) fps;
@@ -154,26 +198,13 @@ public class Game implements Runnable {
                 ticks = 0;
                 timer = 0;
             }
+            try {
+                Thread.sleep(10); // reduce the high cpu usage by half.
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
-        stop();
-    }
 
-    public synchronized void start() {
-        if (running) {
-            return;
-        }
-        running = true;
-        thread = new Thread(this);
-        thread.start();
-    }
-
-    public synchronized void stop() {
         running = false;
-        try {
-            Playlist.close();
-            thread.join();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 }

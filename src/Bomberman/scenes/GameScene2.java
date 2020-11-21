@@ -50,7 +50,7 @@ public class GameScene2 extends MyScene { // 2 player
         gameMap.update();
         luigi.update();
         minotaur.update();
-        back.update(game.getMenuScene());
+        back.update(game.getOptionScene());
         soundButton.update();
 
         if (!luigi.alive || !minotaur.alive) {

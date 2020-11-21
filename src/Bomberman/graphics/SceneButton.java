@@ -28,6 +28,7 @@ public class SceneButton {
     }
 
     public void update(MyScene scene) {
+
         state = false;
         if ((game.getMouseMN().getMx() >= x && game.getMouseMN().getMy() >= y) &&
             (game.getMouseMN().getMx() <= x + width && game.getMouseMN().getMy() <= y + height)) {
@@ -44,6 +45,7 @@ public class SceneButton {
                     game.getGameScene3().reset();
                 }
                 MyScene.setCurrentScene(scene);
+                game.getMouseMN().setLeft(false);
             }
         }
     }

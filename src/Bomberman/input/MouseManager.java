@@ -27,6 +27,14 @@ public class MouseManager implements MouseListener, MouseMotionListener {
         return right;
     }
 
+    public void setLeft(boolean left) {
+        this.left = left;
+    }
+
+    public void setRight(boolean right) {
+        this.right = right;
+    }
+
     public MouseManager() {
 
     }
