@@ -7,6 +7,7 @@
     - [Sounds](#Sounds)
     - [How to compile and run](#How-to-compile-and-run)
     - [How to play](#How-to-play)
+    - [Screen shots](#Screen-shots)
     - [Credit](#Credit)
 ## Description
 - OOP class project.
@@ -41,7 +42,12 @@
 - In two players mode:</br>
     Offline: _WASD_ and _SPACE_ keys for Luigi. ⬆⬇⬅➡ and _P_ keys for Minotaur.</br>
     Online via localhost: Both are _WASD_ and _SPACE_ keys.
-    
+
+## Screen shots
+
+![scs2](./screenshots/scs2.bmp)
+![scs3](./screenshots/scs3.bmp)
+
 ## Credit
 - Made by [***@Darthveloper21***](https://github.com/Darthveloper21).
 - This project is licensed under the [**MIT License**](https://choosealicense.com/licenses/mit).
