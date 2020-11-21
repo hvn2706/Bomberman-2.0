@@ -40,7 +40,7 @@
     Red ghost has random movement</br>
     Blue ghost is smarter, it follow you every where if it is possible to find at least a path.
 - In two players mode:</br>
-    Offline: _WASD_ and _SPACE_ keys for Luigi. ⬆⬇⬅➡ and _P_ keys for Minotaur.</br>
+    Offline: _WASD_ and _SPACE_ keys for Luigi. ⬆️⬇️⬅️➡️ and _P_ keys for Minotaur.</br>
     Online via localhost: Both are _WASD_ and _SPACE_ keys.
 
 ## Screen shots
