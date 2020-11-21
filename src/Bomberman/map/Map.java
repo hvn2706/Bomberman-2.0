@@ -127,9 +127,9 @@ public class Map {
                     if (gameMap[i][j] == '1') {
                         int rand_int = rand.nextInt(100);
                         if (rand_int < chance) {
-                            if (rand_int % 3 == 0) {
+                            if (rand_int % 5 == 0 || rand_int % 5 == 1) {
                                 powerMap[i][j] = '1';
-                            } else if (rand_int % 3 == 1) {
+                            } else if (rand_int % 5 == 2 || rand_int % 5 == 3) {
                                 powerMap[i][j] = '2';
                             } else {
                                 powerMap[i][j] = '3';

@@ -152,8 +152,8 @@ public class Player extends Creature {
                     Playlist.setBomb.play();
                     Bomb bomb = new Bomb(game, gameMap, yBomb * Resources.tWidth,
                             xBomb * Resources.tHeight, bombLength, this);
-                    bombs.add(bomb);
                     bomb.setBombed(true);
+                    bombs.add(bomb);
                 }
             }
         }
