@@ -21,7 +21,7 @@
 
 ## Sounds
 - I google for sound effects.
-- Music backgroud is [STRLGHT - Clutch](https://www.youtube.com/watch?v=z1vcJPKHJ3A).
+- Background music is [STRLGHT - Clutch](https://www.youtube.com/watch?v=z1vcJPKHJ3A).
 
 ## How to compile and run
 - You need [JDK8](https://www.oracle.com/java/technologies/javase/javase-jdk8-downloads.html) (Java SE Development Kit 8) to compile and run java classes.
