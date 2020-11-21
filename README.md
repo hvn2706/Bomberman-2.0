@@ -28,7 +28,7 @@
 - To play online via localhost:
     
    First run the game, the game will ask you if you want to run the server. Click yes to host one.</br>
-![scs1](./screenshots/scs1.bmp). </br>
+![scs1](./screenshots/scs1.bmp) </br>
    
    When another computer that also connects with localhost run the game, click "no" and both apps will automatically connected to each other.</br>
    Choose two players-online mode and enjoy the game.
