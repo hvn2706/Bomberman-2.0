@@ -8,7 +8,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class Server extends Thread{
-    private static final ArrayList<ClientHandler> clients = new ArrayList<>();
+    public static final ArrayList<ClientHandler> clients = new ArrayList<>();
     private static final ExecutorService pool = Executors.newFixedThreadPool(4);
     private static final int PORT = 2521;
 

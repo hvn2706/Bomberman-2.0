@@ -10,6 +10,7 @@ import Bomberman.graphics.gallery.Minotaur;
 import Bomberman.graphics.gallery.Resources;
 import Bomberman.map.Map;
 import Bomberman.network.Client;
+import Bomberman.network.Server;
 import Bomberman.network.ServerConnection;
 
 import java.awt.*;
@@ -24,6 +25,7 @@ public class GameScene3 extends MyScene {
     private final Status strLuigi;
     private final Status strMinotaur;
     private final Map gameMap;
+    private final Font font;
     private long timer = 0;
     private boolean mapIsUpdated = false;
 
@@ -36,6 +38,7 @@ public class GameScene3 extends MyScene {
         soundButton = new SoundButton(game, 860, 486);
         strLuigi = new Status(luigi, 856, 94);
         strMinotaur = new Status(minotaur, 856, 188);
+        font = new Font(Font.MONOSPACED, Font.BOLD, 25);
         if (Game.serverRunning) {
             luigi.input = true;
             minotaur.input = false;
@@ -120,13 +123,22 @@ public class GameScene3 extends MyScene {
 
     @Override
     public void update() {
+        back.update(game.getOptionScene());
+        soundButton.update();
+
+        if (!Client.serverRunning) {
+            return;
+        }
+
+        if (Game.serverRunning && Server.clients.size() < 2) {
+            return;
+        }
+
         sendDataToServer();
         updateFromServer();
         gameMap.update();
         luigi.update();
         minotaur.update();
-        back.update(game.getMenuScene());
-        soundButton.update();
 
         if (!luigi.alive || !minotaur.alive) {
             long lastTime = System.nanoTime();
@@ -147,12 +159,27 @@ public class GameScene3 extends MyScene {
 
     @Override
     public void render(Graphics g) {
+        if (!Client.serverRunning) {
+            g.setFont(font);
+            g.drawString("No server found...", 15, 30);
+            back.render(g);
+            soundButton.render(g);
+            return;
+        }
+
+        if (Game.serverRunning && Server.clients.size() < 2) {
+            g.setFont(font);
+            g.drawString("Waiting for other player...", 15, 30);
+            back.render(g);
+            soundButton.render(g);
+            return;
+        }
         gameMap.render(g);
+        back.render(g);
+        soundButton.render(g);
         strLuigi.render(g);
         strMinotaur.render(g);
         luigi.render(g);
         minotaur.render(g);
-        back.render(g);
-        soundButton.render(g);
     }
 }
