@@ -11,7 +11,6 @@
     - [Credit](#Credit)
 ## Description
 - OOP class project.
-- A better version of my [c++ Bomberman](https://github.com/Darthveloper21/Bomberman-UET)
 - Just like the classic NES bomberman, we play as a character who has bombs as weapons.
 
 ## Assets
