@@ -53,6 +53,10 @@ public class Map {
         bombMap[x][y] = c;
     }
 
+    public char getBombCoor(int x, int y) {
+        return bombMap[x][y];
+    }
+
     public void setPowerCoor(int x, int y, char c) {
         powerMap[x][y] = c;
     }
