@@ -11,16 +11,15 @@ import Bomberman.sounds.Playlist;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
 import java.awt.image.BufferStrategy;
 
-public class Game {
+public class Game implements Runnable {
     public final Display window;
     public int width;
     public int height;
 
-    private boolean running = true;
+    private boolean running = false;
+    private Thread thread;
 
     private final GameScene1 gameScene1;
     private final GameScene2 gameScene2;
@@ -50,44 +49,6 @@ public class Game {
         window.getWindow().addMouseMotionListener(mouseMN);
         window.getCanvas().addMouseListener(mouseMN);
         window.getCanvas().addMouseMotionListener(mouseMN);
-        window.getWindow().addWindowListener(new WindowListener() {
-            @Override
-            public void windowOpened(WindowEvent e) {
-
-            }
-
-            @Override
-            public void windowClosing(WindowEvent e) {
-
-            }
-
-            @Override
-            public void windowClosed(WindowEvent e) {
-                running = false;
-                Playlist.close();
-                System.out.println("close");
-            }
-
-            @Override
-            public void windowIconified(WindowEvent e) {
-
-            }
-
-            @Override
-            public void windowDeiconified(WindowEvent e) {
-
-            }
-
-            @Override
-            public void windowActivated(WindowEvent e) {
-
-            }
-
-            @Override
-            public void windowDeactivated(WindowEvent e) {
-
-            }
-        });
         gameScene1 = new GameScene1(this);
         gameScene2 = new GameScene2(this);
 
@@ -171,6 +132,7 @@ public class Game {
         g.dispose();
     }
 
+    @Override
     public void run() {
         int fps = 60;
         double perFrame = 1000000000 / (double) fps;
@@ -204,7 +166,28 @@ public class Game {
                 e.printStackTrace();
             }
         }
+        stop();
+    }
 
+    public synchronized void start() {
+        if (running) {
+            return;
+        }
+        running = true;
+        thread = new Thread(this);
+        thread.start();
+    }
+
+    public synchronized void stop() {
+        Playlist.close();
+        if (!running) {
+            return;
+        }
         running = false;
+        try {
+            thread.join();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
