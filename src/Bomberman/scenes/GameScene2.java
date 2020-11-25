@@ -3,7 +3,6 @@ package Bomberman.scenes;
 import Bomberman.Game;
 import Bomberman.gameObjects.creatures.Player;
 import Bomberman.graphics.SceneButton;
-import Bomberman.graphics.SoundButton;
 import Bomberman.graphics.Status;
 import Bomberman.graphics.gallery.Luigi;
 import Bomberman.graphics.gallery.Minotaur;
@@ -16,7 +15,6 @@ public class GameScene2 extends MyScene { // 2 player
     private final Player luigi;
     private final Player minotaur;
     private final SceneButton back;
-    private final SoundButton soundButton;
     private final Status strLuigi;
     private final Status strMinotaur;
     private final Map gameMap;
@@ -28,7 +26,6 @@ public class GameScene2 extends MyScene { // 2 player
         minotaur = new Player(game, gameMap, 764, 484, new Minotaur());
         luigi = new Player(game, gameMap, 44, 44, new Luigi());
         back = new SceneButton(game, Resources.back1, Resources.back2, 860, 6);
-        soundButton = new SoundButton(game, 860, 486);
         strLuigi = new Status(luigi, 856, 94);
         strMinotaur = new Status(minotaur, 856, 188);
     }
@@ -51,7 +48,6 @@ public class GameScene2 extends MyScene { // 2 player
         luigi.update();
         minotaur.update();
         back.update(game.getOptionScene());
-        soundButton.update();
 
         if (!luigi.alive || !minotaur.alive) {
             long lastTime = System.nanoTime();
@@ -78,6 +74,5 @@ public class GameScene2 extends MyScene { // 2 player
         luigi.render(g);
         minotaur.render(g);
         back.render(g);
-        soundButton.render(g);
     }
 }

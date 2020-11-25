@@ -3,7 +3,6 @@ package Bomberman.scenes;
 import Bomberman.Game;
 import Bomberman.gameObjects.creatures.Player;
 import Bomberman.graphics.SceneButton;
-import Bomberman.graphics.SoundButton;
 import Bomberman.graphics.Status;
 import Bomberman.graphics.gallery.Luigi;
 import Bomberman.graphics.gallery.Minotaur;
@@ -21,7 +20,6 @@ public class GameScene3 extends MyScene {
     private final Player myPlayer;
     private final Player opPlayer;
     private final SceneButton back;
-    private final SoundButton soundButton;
     private final Status strLuigi;
     private final Status strMinotaur;
     private final Map gameMap;
@@ -35,7 +33,6 @@ public class GameScene3 extends MyScene {
         minotaur = new Player(game, gameMap, 764, 484, new Minotaur());
         luigi = new Player(game, gameMap, 44, 44, new Luigi());
         back = new SceneButton(game, Resources.back1, Resources.back2, 860, 6);
-        soundButton = new SoundButton(game, 860, 486);
         strLuigi = new Status(luigi, 856, 94);
         strMinotaur = new Status(minotaur, 856, 188);
         font = new Font(Font.MONOSPACED, Font.BOLD, 25);
@@ -124,7 +121,6 @@ public class GameScene3 extends MyScene {
     @Override
     public void update() {
         back.update(game.getOptionScene());
-        soundButton.update();
 
         if (!Client.serverRunning) {
             return;
@@ -163,7 +159,6 @@ public class GameScene3 extends MyScene {
             g.setFont(font);
             g.drawString("No server found...", 15, 30);
             back.render(g);
-            soundButton.render(g);
             return;
         }
 
@@ -171,12 +166,10 @@ public class GameScene3 extends MyScene {
             g.setFont(font);
             g.drawString("Waiting for other player...", 15, 30);
             back.render(g);
-            soundButton.render(g);
             return;
         }
         gameMap.render(g);
         back.render(g);
-        soundButton.render(g);
         strLuigi.render(g);
         strMinotaur.render(g);
         luigi.render(g);

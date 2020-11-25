@@ -1,5 +1,6 @@
 package Bomberman;
 
+import Bomberman.graphics.SoundButton;
 import Bomberman.graphics.gallery.Resources;
 import Bomberman.graphics.Display;
 import Bomberman.input.KeyManager;
@@ -27,6 +28,7 @@ public class Game implements Runnable {
     private final MenuScene menuScene;
     private final OptionScene optionScene;
     private final ResultScene resultScene;
+    private final SoundButton soundButton;
 
     private final KeyManager keyMN = new KeyManager();
     private final MouseManager mouseMN = new MouseManager();
@@ -65,6 +67,7 @@ public class Game implements Runnable {
         menuScene = new MenuScene(this);
         optionScene = new OptionScene(this);
         resultScene = new ResultScene(this);
+        soundButton = new SoundButton(this, 860, 486);
         MyScene.setCurrentScene(menuScene);
         font = new Font(Font.MONOSPACED, Font.BOLD, 14);
     }
@@ -104,6 +107,7 @@ public class Game implements Runnable {
     private void update() {
         if (MyScene.getCurrentScene() != null) {
             MyScene.getCurrentScene().update();
+            soundButton.update();
         } else {
             System.out.println("no scene found");
         }
@@ -126,6 +130,7 @@ public class Game implements Runnable {
         }
         g.setFont(font);
         g.drawString("FPS: " + displayFPS, 862, 532);
+        soundButton.render(g);
 
         //end drawing
         bs.show();
