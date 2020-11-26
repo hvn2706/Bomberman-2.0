@@ -34,7 +34,7 @@ public class GameScene1 extends MyScene { // 1 player
 
     public GameScene1(Game game) {
         super(game);
-        this.gameMap = new Map("resources/map1.txt", 10);
+        this.gameMap = new Map("resources/map1.txt", 24);
         luigi = new Player(game, gameMap, 44, 44, new Luigi());
         redGhost1 = new Dummy(game, gameMap, 324, 164, new RedGhost());
         redGhost2 = new Dummy(game, gameMap, 764, 44, new RedGhost());
