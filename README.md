@@ -48,5 +48,5 @@
 ![scs3](./screenshots/scs3.bmp)
 
 ## Credit
-- Made by [***@Darthveloper21***](https://github.com/Darthveloper21).
+- Made by [***@hvn2706***](https://github.com/hvn2706).
 - This project is licensed under the [**MIT License**](https://choosealicense.com/licenses/mit).
